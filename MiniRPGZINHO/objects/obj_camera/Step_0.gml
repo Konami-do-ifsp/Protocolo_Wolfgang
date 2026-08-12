@@ -1,4 +1,4 @@
-// 1. Seguir jogador (Suavizado com lerp)
+ // 1. Seguir jogador (Suavizado com lerp)
 var _alvo_x = obj_player.x - (camera_get_view_width(view_camera) / 2);
 var _alvo_y = obj_player.y - (camera_get_view_height(view_camera) / 2);
 

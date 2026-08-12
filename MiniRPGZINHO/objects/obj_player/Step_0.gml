@@ -1,4 +1,4 @@
-  
+    
 if (hp <= 0 && !exploding)
 {
     state = state_explode;
@@ -13,20 +13,41 @@ if(hp<=0){
 	}
 }	
 state();
-
+if (keyboard_check_pressed(ord("1"))){
+    current_weapon = Weapon.FIREBALL;
+}
+if (keyboard_check_pressed(ord("2"))){
+    current_weapon = Weapon.SWORD;
+}
 
 hp_anim = lerp(hp_anim, hp, 0.1);
 var mx = mouse_x;
 var my = mouse_y;
 if(can_attack){
 	var dir_mouse = point_direction(x, y, mx, my);
-	if (mouse_check_button_pressed(mb_left))
-	{
-	    var b = instance_create_layer(x, y, "Instances", obj_bullet);
-		audio_play_sound(snd_attack, 1, false);
-	    b.dir = dir_mouse;
-		can_attack = false;
-		alarm[0] = 30;
+	switch(current_weapon){
+		case Weapon.FIREBALL:
+			if (mouse_check_button_pressed(mb_left))
+			{
+			    var b = instance_create_layer(x, y, "Instances", obj_bullet);
+				audio_play_sound(snd_attack, 1, false);
+			    b.dir = dir_mouse;
+				can_attack = false;
+				alarm[0] = 30;
+				break;
+			}
+		 case Weapon.SWORD:
+			if (mouse_check_button_pressed(mb_left))
+			{
+				var ang = point_direction(x, y, mouse_x, mouse_y);
+				var dist = 12; 
+			    var b = instance_create_layer(x + lengthdir_x(dist, ang),y + lengthdir_y(dist, ang),"Instances",obj_sword);
+				audio_play_sound(snd_hit_player, 1, false);
+			    b.dir = ang
+				b.image_angle = ang
+				can_attack = false;
+				alarm[0] = 60;
+			}
 	}
 }
 
@@ -45,30 +66,30 @@ if (_input_x != 0 || _input_y != 0) {
     vspd = 0;
 }
 
-if (place_meeting(x + hspd, y, obj_collision) && _input_y == 0) {
+if ((place_meeting(x + hspd, y, obj_collision) || place_meeting(x + hspd, y, obj_collision_door)) && _input_y == 0) {
     for (var i = 1; i <= 8; i++) {
-        if (!place_meeting(x + hspd, y - i, obj_collision)) { y -= 1; break; }
-        if (!place_meeting(x + hspd, y + i, obj_collision)) { y += 1; break; }
+        if (!place_meeting(x + hspd, y - i, obj_collision) && !place_meeting(x + hspd, y - i, obj_collision_door)) { y -= 1; break; }
+        if (!place_meeting(x + hspd, y + i, obj_collision) && !place_meeting(x + hspd, y + i, obj_collision_door)) { y += 1; break; }
     }
 }
 
-if (place_meeting(x + hspd, y, obj_collision)) {
-    while (!place_meeting(x + sign(hspd), y, obj_collision)) {
+if (place_meeting(x + hspd, y, obj_collision) || place_meeting(x + hspd, y, obj_collision_door)) {
+    while (!place_meeting(x + sign(hspd), y, obj_collision) && !place_meeting(x + sign(hspd), y, obj_collision_door)) {
         x += sign(hspd);
     }
     hspd = 0;
 }
 x += hspd;
 
-if (place_meeting(x, y + vspd, obj_collision) && _input_x == 0) {
+if ((place_meeting(x, y + vspd, obj_collision) || place_meeting(x, y + vspd, obj_collision_door)) && _input_x == 0) {
     for (var i = 1; i <= 8; i++) {
-        if (!place_meeting(x - i, y + vspd, obj_collision)) { x -= 1; break; }
-        if (!place_meeting(x + i, y + vspd, obj_collision)) { x += 1; break; }
+        if (!place_meeting(x - i, y + vspd, obj_collision) && !place_meeting(x - i, y + vspd, obj_collision_door)) { x -= 1; break; }
+        if (!place_meeting(x + i, y + vspd, obj_collision) && !place_meeting(x + i, y + vspd, obj_collision_door)) { x += 1; break; }
     }
 }
 
-if (place_meeting(x, y + vspd, obj_collision)) {
-    while (!place_meeting(x, y + sign(vspd), obj_collision)) {
+if (place_meeting(x, y + vspd, obj_collision) || place_meeting(x, y + vspd, obj_collision_door)) {
+    while (!place_meeting(x, y + sign(vspd), obj_collision) && !place_meeting(x, y + sign(vspd), obj_collision_door)) {
         y += sign(vspd);
     }
     vspd = 0;
@@ -126,5 +147,6 @@ else
 {
     dust_timer = 0;
 }
+
 
 

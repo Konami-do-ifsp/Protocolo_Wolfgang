@@ -17,3 +17,11 @@ invencible = false;
 inv_timer = 0;
 dust_timer = 0;
 canPlayDeathSound = true;
+current_weapon = Weapon.FIREBALL;
+enum Weapon {
+    FIREBALL,
+	SWORD
+
+}
+quantity_heal = 0;
+ja_toco_som_espada = false;

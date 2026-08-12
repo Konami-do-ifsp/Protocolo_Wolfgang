@@ -1,6 +1,6 @@
-   if (instance_exists(obj_player))
+    if (instance_exists(obj_player))
 {
-    if (point_distance(x, y, obj_player.x, obj_player.y) < 50)
+     
     {
         var dist = point_distance(x, y, obj_player.x, obj_player.y);
 
@@ -44,4 +44,8 @@ if (!audio_is_playing(snd_bats)) {
     if (irandom(1500) == 0) {
         audio_play_sound(snd_bats, 1, false);
     }
+}
+if (hit_timer > 0)
+{
+    hit_timer--;
 }
