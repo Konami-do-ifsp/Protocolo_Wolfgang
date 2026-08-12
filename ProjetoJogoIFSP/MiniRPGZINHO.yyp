@@ -38,6 +38,7 @@
     {"id":{"name":"obj_collision_door","path":"objects/obj_collision_door/obj_collision_door.yy",},},
     {"id":{"name":"obj_collision","path":"objects/obj_collision/obj_collision.yy",},},
     {"id":{"name":"obj_door_open","path":"objects/obj_door_open/obj_door_open.yy",},},
+    {"id":{"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",},},
     {"id":{"name":"obj_gamemanager","path":"objects/obj_gamemanager/obj_gamemanager.yy",},},
     {"id":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},},
     {"id":{"name":"obj_particles_wlk","path":"objects/obj_particles_wlk/obj_particles_wlk.yy",},},

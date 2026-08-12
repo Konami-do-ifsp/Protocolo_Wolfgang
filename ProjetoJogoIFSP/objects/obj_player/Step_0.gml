@@ -1,4 +1,4 @@
-    
+     
 if (hp <= 0 && !exploding)
 {
     state = state_explode;
@@ -42,7 +42,7 @@ if(can_attack){
 				var ang = point_direction(x, y, mouse_x, mouse_y);
 				var dist = 12; 
 			    var b = instance_create_layer(x + lengthdir_x(dist, ang),y + lengthdir_y(dist, ang),"Instances",obj_sword);
-				audio_play_sound(snd_hit_player, 1, false);
+				audio_play_sound(snd_sword_slash, 1, false);
 			    b.dir = ang
 				b.image_angle = ang
 				can_attack = false;
