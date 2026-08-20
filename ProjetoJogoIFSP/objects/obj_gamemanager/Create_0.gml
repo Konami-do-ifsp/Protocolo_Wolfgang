@@ -1,1 +1,1 @@
-global.key = true;
+global.has_key = false;

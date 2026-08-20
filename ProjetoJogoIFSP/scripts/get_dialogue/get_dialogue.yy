@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"player_states",
+  "%Name":"get_dialogue",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"player_states",
+  "name":"get_dialogue",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

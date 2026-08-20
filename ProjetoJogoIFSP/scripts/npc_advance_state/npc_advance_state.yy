@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"player_states",
+  "%Name":"npc_advance_state",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"player_states",
+  "name":"npc_advance_state",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",
