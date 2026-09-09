@@ -1,4 +1,4 @@
-active = false;
+  active = false;
 
 dialogue = [];
 dialogue_index = 0;
@@ -26,8 +26,7 @@ start = function(_id, _name)
     full_text = dialogue[dialogue_index];
     display_text = "";
     char_index = 0;
-    text_finished = false;
-
+      
     active = true;
     wait_release = true;
 };

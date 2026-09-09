@@ -14,7 +14,7 @@ if (hit_enemy != noone)
     var enemy_y = hit_enemy.y;
 
     // Chama a função de dano do parent
-    hit_enemy.take_damage(damage);
+    hit_enemy.take_damage(damage, dir);
 
     // Partículas de Sangue
     for (var j = 0; j < 6; j++)

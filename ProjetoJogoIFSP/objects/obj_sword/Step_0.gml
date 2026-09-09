@@ -24,7 +24,7 @@ for (var i = 0; i < ds_list_size(lista); i++)
         var enemy_y = inimigo.y;
 
         // 2. Aplica o dano (mesmo que ele seja destruído aqui, a posição já está salva)
-        inimigo.take_damage(damage);
+        inimigo.take_damage(damage, dir);
 
 
         // 3. Cria as partículas de sangue usando as coordenadas salvas

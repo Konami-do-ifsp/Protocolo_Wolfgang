@@ -64,6 +64,7 @@
     {"id":{"name":"snd_player_hitted","path":"sounds/snd_player_hitted/snd_player_hitted.yy",},},
     {"id":{"name":"snd_sword_slash","path":"sounds/snd_sword_slash/snd_sword_slash.yy",},},
     {"id":{"name":"snd_walking","path":"sounds/snd_walking/snd_walking.yy",},},
+    {"id":{"name":"paleta","path":"sprites/paleta/paleta.yy",},},
     {"id":{"name":"spr_1x1","path":"sprites/spr_1x1/spr_1x1.yy",},},
     {"id":{"name":"spr_bat","path":"sprites/spr_bat/spr_bat.yy",},},
     {"id":{"name":"spr_blood","path":"sprites/spr_blood/spr_blood.yy",},},

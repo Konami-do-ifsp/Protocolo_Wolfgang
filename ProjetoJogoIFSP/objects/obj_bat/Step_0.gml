@@ -1,11 +1,12 @@
+var dir = 0;
+
 if (instance_exists(obj_player))
 {
     var dist = point_distance(x, y, obj_player.x, obj_player.y);
 
     if (dist < 50 && dist > 5)
     {
-        var dir = point_direction(x, y, obj_player.x, obj_player.y);
-
+        dir = point_direction(x, y, obj_player.x, obj_player.y);
         x += lengthdir_x(spd, dir);
         y += lengthdir_y(spd, dir);
     }
@@ -16,27 +17,25 @@ if (instance_exists(obj_player))
         {
             if (obj_player.hp > 0)
             {
+                if (dist > 0) dir = point_direction(x, y, obj_player.x, obj_player.y);
                 obj_player.hp -= 2;
-
                 audio_play_sound(snd_player_hitted, 1, false);
-
                 can_attack = false;
 
-                with (obj_camera)
-                {
-                    shake = 3;
-                    shake_time = 6;
-                    shake_fade = 1;
-                }
+                with (obj_camera) { shake = 3; shake_time = 6; shake_fade = 1; }
 
-                alarm[0] = 30;
+                global.hitstop = 4;
 
                 with (obj_player)
                 {
+                    kb_x += lengthdir_x(2, dir);
+                    kb_y += lengthdir_y(2, dir);
                     flash_timer = 20;
                     invencible = true;
                     inv_timer = 30;
                 }
+
+                alarm[0] = 30;
             }
         }
     }
@@ -54,3 +53,12 @@ if (hit_timer > 0)
 {
     hit_timer--;
 }
+
+
+kb_x = lerp(kb_x, 0, 0.2);
+kb_y = lerp(kb_y, 0, 0.2);
+if (abs(kb_x) < 0.1) kb_x = 0;
+if (abs(kb_y) < 0.1) kb_y = 0;
+
+x += kb_x;
+y += kb_y;

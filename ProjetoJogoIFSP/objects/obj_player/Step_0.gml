@@ -1,4 +1,4 @@
-     
+if (global.hitstop > 0) exit;     
 if (hp <= 0 && !exploding)
 {
     state = state_explode;
@@ -54,6 +54,7 @@ if(can_attack){
 if(keyboard_check(ord("R"))) room_restart();
 
 
+// --- MOVIMENTAÇÃO ADAPTADA PARA ESPAÇAMENTO DE 64x64 ---
 var _input_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 var _input_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
@@ -66,34 +67,57 @@ if (_input_x != 0 || _input_y != 0) {
     vspd = 0;
 }
 
-if ((place_meeting(x + hspd, y, obj_collision) || place_meeting(x + hspd, y, obj_collision_door)) && _input_y == 0) {
-    for (var i = 1; i <= 8; i++) {
-        if (!place_meeting(x + hspd, y - i, obj_collision) && !place_meeting(x + hspd, y - i, obj_collision_door)) { y -= 1; break; }
-        if (!place_meeting(x + hspd, y + i, obj_collision) && !place_meeting(x + hspd, y + i, obj_collision_door)) { y += 1; break; }
+// --- KNOCKBACK ---
+hspd += kb_x;
+vspd += kb_y;
+
+kb_x = lerp(kb_x, 0, 0.2);
+kb_y = lerp(kb_y, 0, 0.2);
+if (abs(kb_x) < 0.1) kb_x = 0;
+if (abs(kb_y) < 0.1) kb_y = 0;
+
+// Função auxiliar para checar o array
+var _colidindo = function(_check_x, _check_y) {
+    for (var _i = 0; _i < array_length(alvos_colisao); _i++) {
+        if (place_meeting(_check_x, _check_y, alvos_colisao[_i])) return true;
+    }
+    return false;
+}
+
+// --- COLISÃO X (Deslize de quina aumentado para 32 pixels) ---
+if (_colidindo(x + hspd, y) && _input_y == 0) {
+    for (var i = 1; i <= 32; i++) { // Aumentado de 8 para 32
+        if (!_colidindo(x + hspd, y - i)) { y -= 1; break; }
+        if (!_colidindo(x + hspd, y + i)) { y += 1; break; }
     }
 }
 
-if (place_meeting(x + hspd, y, obj_collision) || place_meeting(x + hspd, y, obj_collision_door)) {
-    while (!place_meeting(x + sign(hspd), y, obj_collision) && !place_meeting(x + sign(hspd), y, obj_collision_door)) {
+if (_colidindo(x + hspd, y)) {
+    while (!_colidindo(x + sign(hspd), y)) {
         x += sign(hspd);
     }
     hspd = 0;
 }
 x += hspd;
 
-if ((place_meeting(x, y + vspd, obj_collision) || place_meeting(x, y + vspd, obj_collision_door)) && _input_x == 0) {
-    for (var i = 1; i <= 8; i++) {
-        if (!place_meeting(x - i, y + vspd, obj_collision) && !place_meeting(x - i, y + vspd, obj_collision_door)) { x -= 1; break; }
-        if (!place_meeting(x + i, y + vspd, obj_collision) && !place_meeting(x + i, y + vspd, obj_collision_door)) { x += 1; break; }
+// --- COLISÃO Y (Deslize de quina aumentado para 32 pixels) ---
+if (_colidindo(x, y + vspd) && _input_x == 0) {
+    for (var i = 1; i <= 32; i++) { // Aumentado de 8 para 32
+        if (!_colidindo(x - i, y + vspd)) { x -= 1; break; }
+        if (!_colidindo(x + i, y + vspd)) { x += 1; break; }
     }
 }
 
-if (place_meeting(x, y + vspd, obj_collision) || place_meeting(x, y + vspd, obj_collision_door)) {
-    while (!place_meeting(x, y + sign(vspd), obj_collision) && !place_meeting(x, y + sign(vspd), obj_collision_door)) {
+if (_colidindo(x, y + vspd)) {
+    while (!_colidindo(x, y + sign(vspd))) {
         y += sign(vspd);
     }
     vspd = 0;
 }
+
+
+
+
 y += vspd;
 if (flash_timer > 0)
 {

@@ -1,4 +1,4 @@
-state = state_idle;
+ state = state_idle;
 hspd = 0;
 vspd = 0;
 spdForever =1.2;
@@ -25,3 +25,6 @@ enum Weapon {
 }
 quantity_heal = 0;
 ja_toco_som_espada = false;
+alvos_colisao = [obj_collision];
+kb_x = 0;
+kb_y = 0;
