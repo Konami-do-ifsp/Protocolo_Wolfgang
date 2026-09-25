@@ -29,7 +29,7 @@ else
     escala_sair = lerp(escala_sair, 1, 0.2);
 }
 
-// Confirmar
+
 if (keyboard_check_pressed(vk_enter))
 {
     switch (opcao)

@@ -54,7 +54,7 @@ if(can_attack){
 if(keyboard_check(ord("R"))) room_restart();
 
 
-// --- MOVIMENTAÇÃO ADAPTADA PARA ESPAÇAMENTO DE 64x64 ---
+
 var _input_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 var _input_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
@@ -67,7 +67,7 @@ if (_input_x != 0 || _input_y != 0) {
     vspd = 0;
 }
 
-// --- KNOCKBACK ---
+
 hspd += kb_x;
 vspd += kb_y;
 
@@ -76,7 +76,6 @@ kb_y = lerp(kb_y, 0, 0.2);
 if (abs(kb_x) < 0.1) kb_x = 0;
 if (abs(kb_y) < 0.1) kb_y = 0;
 
-// Função auxiliar para checar o array
 var _colidindo = function(_check_x, _check_y) {
     for (var _i = 0; _i < array_length(alvos_colisao); _i++) {
         if (place_meeting(_check_x, _check_y, alvos_colisao[_i])) return true;
@@ -84,9 +83,9 @@ var _colidindo = function(_check_x, _check_y) {
     return false;
 }
 
-// --- COLISÃO X (Deslize de quina aumentado para 32 pixels) ---
+
 if (_colidindo(x + hspd, y) && _input_y == 0) {
-    for (var i = 1; i <= 32; i++) { // Aumentado de 8 para 32
+    for (var i = 1; i <= 32; i++) { 
         if (!_colidindo(x + hspd, y - i)) { y -= 1; break; }
         if (!_colidindo(x + hspd, y + i)) { y += 1; break; }
     }
@@ -100,9 +99,9 @@ if (_colidindo(x + hspd, y)) {
 }
 x += hspd;
 
-// --- COLISÃO Y (Deslize de quina aumentado para 32 pixels) ---
+
 if (_colidindo(x, y + vspd) && _input_x == 0) {
-    for (var i = 1; i <= 32; i++) { // Aumentado de 8 para 32
+    for (var i = 1; i <= 32; i++) { 
         if (!_colidindo(x - i, y + vspd)) { x -= 1; break; }
         if (!_colidindo(x + i, y + vspd)) { x += 1; break; }
     }
@@ -160,11 +159,11 @@ if (_input_x != 0 || _input_y != 0)
     {
         var p = instance_create_layer(x, y +5, "Effects", obj_particles_wlk);
 
-        // Opcional: deixa a partícula um pouco espalhada
+        
         p.x += irandom_range(-2, 2);
         p.y += irandom_range(-2, 2);
 
-        dust_timer = 7; // Quanto menor, mais partículas
+        dust_timer = 7; // quanto menor mais particula tem
     }
 }
 else

@@ -22,10 +22,10 @@ function npc_advance_state(_npc_id, _current_state)
                     return "done";
 
                 case "done":
-                    return "done"; // já acabou, não muda mais
+                    return "done"; // ja acabo
             }
             break;
     }
 
-    return _current_state; // fallback: não muda nada
+    return _current_state;
 }

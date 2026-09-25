@@ -1,7 +1,7 @@
-if (!active)
+ if (!active)
     exit;
 
-// efeito de máquina de escrever — só roda enquanto não terminou
+
 if (!text_finished)
 {
     char_index += text_speed;
@@ -15,10 +15,9 @@ if (!text_finished)
     display_text = string_copy(full_text, 1, char_index);
 }
 
-// input de avançar: espaço ou clique do mouse
+
 var _advance_pressed = keyboard_check_pressed(vk_space) || mouse_check_button_pressed(mb_left);
 
-// espera soltar o botão que abriu o diálogo (evita conflito com o E do NPC)
 if (wait_release)
 {
     if (!keyboard_check(ord("E")))

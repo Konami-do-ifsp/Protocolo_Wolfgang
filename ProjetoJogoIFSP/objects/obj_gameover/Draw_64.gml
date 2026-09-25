@@ -1,7 +1,7 @@
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
-// Título
+
 draw_set_font(fnt_gui_big);
 
 draw_text(
@@ -11,7 +11,7 @@ draw_text(
 );
 
 
-// Reiniciar
+
 if (opcao == 0)
 {
     draw_set_font(fnt_gui_big);
@@ -32,7 +32,7 @@ else
 }
 
 
-// Sair
+
 if (opcao == 1)
 {
     draw_set_font(fnt_gui_big);

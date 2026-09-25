@@ -46,7 +46,7 @@ if (h == 0 && v == 0)
 
 function state_explode()
 {
-    // Só define uma vez
+    
     if (!exploding)
     {
         exploding = true;
@@ -56,7 +56,7 @@ function state_explode()
 		spd = 0;
     }
 
-    // Espera acabar a animação
+    
     if (image_index >= image_number - 1)
     {
 		image_index = image_number - 1;
