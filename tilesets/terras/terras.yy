@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"terras",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"terras",
+  "out_columns":2,
+  "out_tilehborder":1,
+  "out_tilevborder":1,
+  "parent":{
+    "name":"primeiro cenario do jogo",
+    "path":"primeiro cenario do jogo.yyp",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"terra2",
+    "path":"sprites/terra2/terra2.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":16,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":16,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":4,
+}
