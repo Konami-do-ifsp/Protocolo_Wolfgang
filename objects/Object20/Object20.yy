@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite44",
-    "path":"sprites/Sprite44/Sprite44.yy",
+    "name":"gabinete",
+    "path":"sprites/gabinete/gabinete.yy",
   },
   "spriteMaskId":null,
   "visible":true,
