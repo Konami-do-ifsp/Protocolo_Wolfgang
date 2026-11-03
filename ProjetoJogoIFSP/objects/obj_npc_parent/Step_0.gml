@@ -11,7 +11,7 @@ if (was_talking && !obj_dialogue.active)
 {
     if (obj_dialogue.npc_name == npc_name)
     {
-        dialogue_id = npc_advance_state("joao", dialogue_id);
+        dialogue_id = npc_advance_state(npc_id, dialogue_id);
     }
 }
 
