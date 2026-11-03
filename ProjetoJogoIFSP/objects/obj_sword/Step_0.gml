@@ -1,4 +1,4 @@
-// Movimento da espada
+
 x += lengthdir_x(spd, dir);
 y += lengthdir_y(spd, dir);
 
@@ -28,7 +28,7 @@ for (var i = 0; i < ds_list_size(lista); i++)
 
 
        
-        for (var j = 0; j < 6; j++)
+        for (var j = 0; j < 20; j++)
         {
             var b = instance_create_layer(
                 enemy_x,
@@ -37,7 +37,7 @@ for (var i = 0; i < ds_list_size(lista); i++)
                 obj_blood
             );
 
-            b.dir = dir + random_range(-30, 30);
+            b.dir = dir + random_range(-90, 90);
         }
 
 
@@ -56,7 +56,7 @@ for (var i = 0; i < ds_list_size(lista); i++)
             audio_play_sound(snd_hit_player, 1, false);
 
             ja_toco_espada = true;
-
+			
             alarm[0] = 30;
         }
     }

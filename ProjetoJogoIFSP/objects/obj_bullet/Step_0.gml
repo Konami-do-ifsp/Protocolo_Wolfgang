@@ -17,10 +17,10 @@ if (hit_enemy != noone)
     hit_enemy.take_damage(damage, dir);
 
 
-    for (var j = 0; j < 6; j++)
+    for (var j = 0; j < 16; j++)
     {
         var b = instance_create_layer(enemy_x, enemy_y, "Instances", obj_blood);
-        b.dir = dir + random_range(-30, 30);
+        b.dir = dir + random_range(-90, 90);
     }
 
 
