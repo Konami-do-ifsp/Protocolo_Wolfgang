@@ -6,8 +6,8 @@
   "name":"Object20",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objetos",
-    "path":"folders/Objetos.yy",
+    "name":"MiniRPGZINHO",
+    "path":"MiniRPGZINHO.yyp",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite44",
-    "path":"sprites/Sprite44/Sprite44.yy",
+    "name":"gabinete",
+    "path":"sprites/gabinete/gabinete.yy",
   },
   "spriteMaskId":null,
   "visible":true,

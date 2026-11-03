@@ -1,0 +1,123 @@
+event_inherited();
+
+hp = 60;
+max_hp = 60;
+
+// ---------- TIMINGS (frames a 60 fps) ----------
+t_windup        = 20;
+t_air           = 34;
+t_land          = 20;
+t_cooldown      = 40;
+t_windup_fast   = 12;   // fase 2
+t_cooldown_fast = 22;   // fase 2
+
+// ---------- PULO ----------
+jump_range    = 200;
+jump_height   = 40;
+homing_speed  = 4;      // px/frame que o alvo persegue o player no ar
+homing_until  = 0.55;   // % do pulo em que o alvo trava
+z = 0;
+
+// ---------- DANO ----------
+body_damage = 1;
+body_cd     = 0;
+aoe_radius  = 48;
+aoe_damage  = 2;        // 2 no centro, 1 na borda
+
+// ---------- ESTADO ----------
+state     = "idle";     // idle, windup, jumping, land
+timer     = 0;
+state_dur = 1;
+fast      = false;
+combo_left = 0;
+aggro      = false;
+aggro_range = 220;
+
+start_x = x;  start_y = y;
+target_x = x; target_y = y;
+face = 1;
+sx = 1;
+sy = 1;
+anim_p = 0;
+
+hurt_player = function(_dmg, _dir)
+{
+    if (!instance_exists(obj_player)) return;
+
+    with (obj_player)
+    {
+        if (invencible || hp <= 0 || exploding) return;
+
+        hp -= _dmg;
+        invencible = true;
+        inv_timer = 60;
+        flash_timer = 20;
+        global.hitstop = 4;
+
+        kb_x += lengthdir_x(4, _dir);
+        kb_y += lengthdir_y(4, _dir);
+    }
+};
+
+start_windup = function()
+{
+    state = "windup";
+    timer = 0;
+    state_dur = fast ? t_windup_fast : t_windup;
+
+    // escolhe o sprite uma vez, para não trocar no meio da animação
+    var _d = point_direction(x, y, obj_player.x, obj_player.y);
+    if (_d > 45 && _d <= 135)
+        sprite_index = spr_cabecao_pulando_costa;
+    else if (_d > 225 && _d <= 315)
+        sprite_index = spr_cabecao_pulando_frente;
+    else
+    {
+        sprite_index = spr_cabecao_pulando_side;
+        face = (lengthdir_x(1, _d) >= 0) ? 1 : -1;
+    }
+    if (sprite_index != spr_cabecao_pulando_side) face = 1;
+
+    // alvo inicial
+    var _dist = min(point_distance(x, y, obj_player.x, obj_player.y), jump_range);
+    target_x = x + lengthdir_x(_dist, _d);
+    target_y = y + lengthdir_y(_dist, _d);
+};
+
+start_jump = function()
+{
+    state = "jumping";
+    timer = 0;
+    state_dur = t_air;
+    start_x = x;
+    start_y = y;
+};
+hp_prev = hp;
+hp_trail = hp;      // rastro branco do dano
+trail_timer = 0;
+bar_alpha = 0;
+boss_name = "CABECÃO";
+land = function()
+{
+    state = "land";
+    timer = 0;
+    state_dur = t_land;
+    x = target_x;
+    y = target_y;
+    z = 0;
+
+    // dano em área, no mesmo frame do impacto
+    var _d = point_distance(x, y, obj_player.x, obj_player.y);
+    if (_d <= aoe_radius)
+    {
+        var _dmg = ceil(aoe_damage * (1 - 0.5 * (_d / aoe_radius)));
+        hurt_player(_dmg, point_direction(x, y, obj_player.x, obj_player.y));
+    }
+
+    // poeira
+    if (layer_exists("Effects"))
+    {
+        repeat (6)
+            instance_create_layer(x + irandom_range(-24, 24), y + irandom_range(-6, 6), "Effects", obj_particles_wlk);
+    }
+};

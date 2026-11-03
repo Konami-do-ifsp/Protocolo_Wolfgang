@@ -2,30 +2,23 @@ function npc_advance_state(_npc_id, _current_state)
 {
     switch (_npc_id)
     {
-        case "joao":
+        case "mateus":
 
             switch (_current_state)
             {
-                case "intro":
-                    return "waiting_for_key";
+                case "data_center_intro":
+                    return "done_DT";
 
-                case "waiting_for_key":
-                    // só avança pra "key_delivered" se o jogador tiver o item
-                    if (global.has_key)
-                    {
-                        global.has_key = false; // "entrega" a chave
-                        return "key_delivered";
-                    }
-                    return "waiting_for_key"; // continua esperando
-
-                case "key_delivered":
-                    return "done";
-
-                case "done":
-                    return "done"; // ja acabo
+                case "done_DT":
+					if(global._tem_aspirador){
+						return "mateus_dps_aspirador";
+					}
+					return "done_DT";
+				case"mateus_dps_aspirador":
+					return "mateus_dps_aspirador"
             }
             break;
-    }
 
     return _current_state;
+	}
 }

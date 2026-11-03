@@ -12,8 +12,8 @@
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"MiniRPGZINHO",
+    "path":"MiniRPGZINHO.yyp",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

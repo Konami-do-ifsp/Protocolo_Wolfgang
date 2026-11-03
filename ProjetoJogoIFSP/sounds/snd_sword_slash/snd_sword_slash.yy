@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.5840136,
+  "duration":0.76780045,
   "exportDir":"",
   "name":"snd_sword_slash",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_sword_slash.mp3",
+  "soundFile":"snd_sword_slash.wav",
   "volume":1.0,
 }

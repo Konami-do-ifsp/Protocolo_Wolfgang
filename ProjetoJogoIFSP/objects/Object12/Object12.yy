@@ -6,8 +6,8 @@
   "name":"Object12",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objetos",
-    "path":"folders/Objetos.yy",
+    "name":"MiniRPGZINHO",
+    "path":"MiniRPGZINHO.yyp",
   },
   "parentObjectId":null,
   "persistent":false,
