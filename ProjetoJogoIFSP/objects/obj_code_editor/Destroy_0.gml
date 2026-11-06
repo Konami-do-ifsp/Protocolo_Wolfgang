@@ -1,0 +1,1 @@
+global.editor_code = lines;

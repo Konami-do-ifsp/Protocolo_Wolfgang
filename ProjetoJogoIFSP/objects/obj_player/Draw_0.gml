@@ -1,5 +1,6 @@
 draw_self();
-if (pull_phase != 0) exit;
+if (instance_exists(obj_code_editor)) exit;
+if (pull_phase != 0 || state == state_pickup) exit;
 if (instance_exists(obj_dialogue) && obj_dialogue.active) exit;
 
 float_timer += 0.08; 
@@ -12,10 +13,10 @@ for (var i = 0; i < array_length(interact_targets); i++)
 {
     var _obj = interact_targets[i];
     
-    // durante a luta com o mini boss, o aspirador não é interagível
+    
     if (_obj == obj_aspirador_preso && instance_exists(obj_cabecao) && obj_cabecao.aggro) continue;
     
-    // depois que o aspirador foi pego, a pedra não é mais interagível
+    
     if (_obj == obj_aspirador_preso && global._tem_aspirador) continue;
     
     if (instance_exists(_obj))
@@ -42,4 +43,15 @@ if (_closest_interactable != noone)
     var _icon_y = _closest_interactable.bbox_top - 8 + _float_offset;
     
     draw_sprite(spr_E, 0, _icon_x, _icon_y  - 10);
+	
+	var _idx = item_idx(_closest_interactable);
+	if (_idx != -1 && _idx != global.item_step)
+	{
+	    var _xx = _icon_x + ((x_shake > 0) ? choose(-2, 2) : 0);
+	    var _xy = _icon_y - 10;
+	    var _s = 7;   
+
+	    draw_line_width_color(_xx - _s, _xy - _s, _xx + _s, _xy + _s, 3, c_red, c_red);
+	    draw_line_width_color(_xx - _s, _xy + _s, _xx + _s, _xy - _s, 3, c_red, c_red);
+	}
 }

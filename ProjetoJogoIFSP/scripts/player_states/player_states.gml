@@ -16,7 +16,7 @@ function get_facing_angle()
 {
     if (dir == "back")  return 90;
     if (dir == "front") return 270;
-    return (image_xscale >= 0) ? 0 : 180;
+    return (image_xscale >= 0) ? 0 : 180; //mostra se ta olhando direita ou esquerda
 }
 
 function state_idle()
@@ -132,7 +132,7 @@ function start_pull_aspirador(_inst)
     puxado = _inst;
     pull_flash = 0;
 
-    // centro da pedra
+    
     pull_target_x = (_inst.bbox_left + _inst.bbox_right) / 2 + pull_offset_x;
     pull_target_y = (_inst.bbox_top + _inst.bbox_bottom) / 2 + pull_offset_y;
 
@@ -144,20 +144,20 @@ function start_pull_aspirador(_inst)
     kb_x = 0;
     kb_y = 0;
     attacking = true;
-    pull_phase = 1;      // 1 = andando até o centro
+    pull_phase = 1;      
     pull_timer = 0;
     state = state_pull_aspirador;
 }
 
 function state_pull_aspirador()
 {
-    // não leva dano durante a cena
+    
     invencible = true;
     inv_timer = 2;
 
     switch (pull_phase)
     {
-        // 1: anda até o meio da pedra
+        
         case 1:
             if (audio_is_playing(snd_walking)) audio_stop_sound(snd_walking);
 
@@ -168,7 +168,7 @@ function state_pull_aspirador()
                 x = pull_target_x;
                 y = pull_target_y;
 
-                // começa a animação de puxar
+                
                 sprite_index = spr_player_puxando_aspirador;
                 image_index = 0;
                 image_speed = 1;
@@ -183,7 +183,7 @@ function state_pull_aspirador()
             }
         break;
 
-        // 2: toca a animação; no frame certo o aspirador sai da pedra
+        
         case 2:
             image_speed = 1;
 
@@ -205,13 +205,13 @@ function state_pull_aspirador()
 					puxado.image_speed = 0;
                 }
                 puxado = noone;
-                // audio_play_sound(snd_item_get, 1, false);
+                
 
                 pull_phase = 3;
             }
         break;
 
-        // 3: continua a animação até o fim
+        
         case 3:
             image_speed = 1;
             pull_flash = max(0, pull_flash - 0.04);
@@ -225,7 +225,7 @@ function state_pull_aspirador()
             }
         break;
 
-        // 4: segura a pose final (aspirador erguido)
+        
         case 4:
             image_speed = 0;
             image_index = image_number - 1;
@@ -260,5 +260,55 @@ function state_explode()
         image_index = image_number - 1;
         image_alpha = 0;
         image_speed = 0;
+    }
+}
+
+
+function item_idx(_inst)
+{
+    for (var i = 0; i < array_length(global.item_order); i++)
+    {
+        if (_inst.object_index == global.item_order[i]) return i;
+    }
+    return -1;
+}
+
+function start_pickup(_inst)
+{
+    var _inst_obj = _inst.object_index;
+    pickup_idx = item_idx(_inst);
+
+    global.item_step++;
+    instance_destroy(_inst);
+
+    var _spr = spr_pegar_cpu;
+	switch (_inst_obj)
+	{
+	    case cpu:       _spr = spr_pegar_cpu; break;
+		case ssd: _spr = spr_pegar_ram; break;
+		case RAm: _spr = spr_pegar_ssd; break;
+	    case Placa_mae: _spr = spr_completado_itens; break;
+	}
+	sprite_index = _spr;
+	show_debug_message("objeto=" + object_get_name(_inst_obj) + " sprite=" + sprite_get_name(sprite_index));
+    image_index = 0;
+    image_speed = 1;
+    kb_x = 0;
+    kb_y = 0;
+    attacking = true;   
+    state = state_pickup;
+	
+}
+
+function state_pickup()
+{
+    
+    invencible = true;
+    inv_timer = 2;
+
+    if (animation_end())
+    {
+        attacking = false;
+        state = state_idle;
     }
 }

@@ -1,20 +1,20 @@
 animacao_entrada = lerp(animacao_entrada, 1, 0.1); 
 
-// 1. TELA DE CRÉDITOS
+//TELA DE CREDITOS
 if (estado_menu == "creditos") {
-    creditos_y -= 1.5; // Velocidade que o texto sobe
+    creditos_y -= 1.5; // velocidade que o texto sobe
     
-    // Aperte Enter para sair dos créditos
+    // Aperte enter para sair dos creditos
     if (keyboard_check_pressed(vk_enter)) {
         estado_menu = "principal";
         opcoes = menu_principal;
         qtd_opcoes = array_length(opcoes);
-        indice = 2; // Volta cravado na opção "Créditos"
+        indice = 2; 
         pos = 2;
         animacao_entrada = 0; 
     }
 } 
-// 2. LÓGICA NORMAL DO MENU
+
 else {
     var _up = keyboard_check_pressed(vk_up);
     var _down = keyboard_check_pressed(vk_down);
@@ -42,7 +42,7 @@ else {
         var _txt_tela = tela_cheia ? "Tela Cheia: ON" : "Tela Cheia: OFF";
         menu_opcoes[0] = _txt_tela;
         menu_opcoes[1] = "FPS: " + string(taxa_quadros);
-        menu_opcoes[2] = "Volume: " + string(volume_jogo * 100) + "%"; // Atualiza o texto do volume
+        menu_opcoes[2] = "Volume: " + string(volume_jogo * 100) + "%";
         opcoes = menu_opcoes; 
     }
 
@@ -68,7 +68,7 @@ else {
                     break;
                 case 2: 
                     estado_menu = "creditos";
-                    creditos_y = room_height; // Joga o texto lá pra baixo pra começar a subir
+                    creditos_y = display_get_gui_height(); 
                     animacao_entrada = 0;
                     break;
                 case 3: 
@@ -89,10 +89,9 @@ else {
                     game_set_speed(taxa_quadros, gamespeed_fps); 
                     break;
                 case 2: 
-                    // Diminui 25%. Se ficar menor que 0, volta pra 100%
                     volume_jogo -= 0.25;
                     if (volume_jogo < 0) volume_jogo = 1.0;
-                    audio_master_gain(volume_jogo); // Aplica no jogo inteiro
+                    audio_master_gain(volume_jogo); 
                     break;
                 case 3: 
                     estado_menu = "principal";

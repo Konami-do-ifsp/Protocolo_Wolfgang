@@ -1,8 +1,6 @@
 event_inherited();
 
-// ==========================================
-// PERSEGUIÇÃO
-// ==========================================
+
 
 if (instance_exists(obj_player))
 {
@@ -12,17 +10,17 @@ if (instance_exists(obj_player))
     var _detect_range = 50;
     var _attack_range = 7;
 
-    // Dentro do alcance de perseguição
+    
     if (_dist < _detect_range)
     {
-        // Ainda não está perto o suficiente para atacar
+        
         if (_dist > _attack_range)
         {
-            // Movimento
+            
             x += lengthdir_x(spd, _dir);
             y += lengthdir_y(spd, _dir);
 
-            // Animação
+            
             if (obj_player.y < y)
             {
                 sprite_index = spr_tv_walk_back;
@@ -33,9 +31,7 @@ if (instance_exists(obj_player))
             }
         }
 
-        // ==========================================
-        // ATAQUE
-        // ==========================================
+
 
         _dist = point_distance(x, y, obj_player.x, obj_player.y);
 
@@ -50,7 +46,7 @@ if (instance_exists(obj_player))
 
                 can_attack = false;
 
-                // Camera shake
+
                 with (obj_camera)
                 {
                     shake = 3;
@@ -58,10 +54,9 @@ if (instance_exists(obj_player))
                     shake_fade = 1;
                 }
 
-                // Hitstop
+
                 global.hitstop = 4;
 
-                // Knockback
                 var _kb_x = lengthdir_x(2, _dir);
                 var _kb_y = lengthdir_y(2, _dir);
 
@@ -81,18 +76,14 @@ if (instance_exists(obj_player))
     }
 }
 
-// ==========================================
-// HIT TIMER
-// ==========================================
+
 
 if (hit_timer > 0)
 {
     hit_timer--;
 }
 
-// ==========================================
-// KNOCKBACK
-// ==========================================
+
 
 kb_x = lerp(kb_x, 0, 0.2);
 kb_y = lerp(kb_y, 0, 0.2);

@@ -1,7 +1,7 @@
 if (!active)
     exit;
 
-// 1. Define a fonte pixelada do diálogo (substitui "fnt_dialogo" pelo nome da tua fonte)
+
 draw_set_font(fnt_dialogo);
 
 var gui_w = display_get_gui_width();
@@ -14,13 +14,13 @@ var box_w = gui_w;
 
 var margin = box_h * 0.08;
 
-// Desenha o fundo da caixa de diálogo
+
 draw_set_alpha(0.85);
 draw_set_color(c_black);
 draw_rectangle(box_x, box_y, box_x + box_w, box_y + box_h, false);
 draw_set_alpha(1);
 
-// Desenha a borda da caixa de diálogo
+
 draw_set_color(c_white);
 draw_rectangle(box_x, box_y, box_x + box_w, box_y + box_h, true);
 
@@ -28,10 +28,10 @@ var portrait_size = box_h - margin * 2;
 var portrait_x = box_x + margin;
 var portrait_y = box_y + margin;
 
-// 2. Só desenha o espaço e o retrato se houver um sprite válido configurado (diferente de -1)
+
 if (speaker_portrait != -1 && sprite_exists(speaker_portrait))
 {
-    // Fundo cinzento de fundo para o retrato
+    
     draw_set_color(c_gray);
     draw_rectangle(
         portrait_x,
@@ -41,7 +41,7 @@ if (speaker_portrait != -1 && sprite_exists(speaker_portrait))
         false
     );
 
-    // Sprite do retrato do personagem
+    
     draw_sprite_stretched(
         speaker_portrait,
         0,
@@ -52,12 +52,12 @@ if (speaker_portrait != -1 && sprite_exists(speaker_portrait))
     );
 }
 
-// Configuração do posicionamento do texto
+
 var text_x = portrait_x + portrait_size + margin;
 var text_y = portrait_y;
 var text_w = (box_x + box_w) - margin - text_x;
 
-// Se não houver retrato, puxa o texto um pouco mais para a esquerda para aproveitar o espaço
+
 if (speaker_portrait == -1 || !sprite_exists(speaker_portrait))
 {
     text_x = box_x + margin * 2;
@@ -68,16 +68,16 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white);
 
-// Desenha o nome do falante
+
 draw_text(text_x, text_y, speaker_name);
 
 var line_h = string_height("A") * 1.2;
 var text_y_body = text_y + string_height("A") + margin * 0.5;
 
-// Desenha o texto do diálogo com quebra automática
+
 draw_text_ext(text_x, text_y_body, display_text, line_h, text_w);
 
-// Indicador de que a frase terminou (setinha para avançar)
+
 if (text_finished)
 {
     draw_set_halign(fa_right);
@@ -85,6 +85,6 @@ if (text_finished)
     draw_text(box_x + box_w - margin, box_y + box_h - margin, "▼");
 }
 
-// Reseta o alinhamento padrão
+
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);

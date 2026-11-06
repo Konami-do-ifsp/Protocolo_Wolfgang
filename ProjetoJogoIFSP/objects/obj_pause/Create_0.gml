@@ -1,19 +1,19 @@
 pausado = false;
-estado_menu = "principal"; // Controla se estamos no menu inicial de pausa ou em "opcoes"
+estado_menu = "principal"; 
 
-// Listas de opções
+// listas de opcoees
 menu_principal = ["Continuar", "Opcoes", "Menu Principal", "Sair"];
 menu_opcoes = ["Tela Cheia: OFF", "FPS: 60", "Volume: 100%", "Voltar"];
 
 opcoes_pause = menu_principal;
 qtd_opcoes = array_length(opcoes_pause);
 
-// Configurações do jogo
+//cConfigurações do jogo
 tela_cheia = window_get_fullscreen();
 taxa_quadros = 60;
 volume_jogo = 1.0;
 
-// Posicionamento e tamanhos
+// posicionamento e tamanho
 indice = 0; 
 pos = indice; 
 

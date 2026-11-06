@@ -3,13 +3,13 @@ if (!pausado) exit;
 var _gui_w = display_get_gui_width();
 var _gui_h = display_get_gui_height();
 
-// Escurece o fundo
+
 draw_set_color(c_black);
 draw_set_alpha(0.6);
 draw_rectangle(0, 0, _gui_w, _gui_h, false);
 draw_set_alpha(1.0);
 
-// Desenho da roleta alinhado à direita 
+
 var _dia = 12.8; 
 var _itens_visiveis = 8;
 var _tam = 500; 
@@ -18,7 +18,7 @@ var _pulso_x = sin(current_time / 300) * 15;
 for (var i = floor(pos) - _itens_visiveis; i <= floor(pos) + _itens_visiveis; i++)
 {	
     var _dir = (i - pos) * _dia;
-    // Ancorado na borda direita com pulso lateral
+    
     var _x = _gui_w - lengthdir_x(_tam, _dir) + _pulso_x; 
     var _y = _gui_h / 2 + (i - pos) * 150;
     

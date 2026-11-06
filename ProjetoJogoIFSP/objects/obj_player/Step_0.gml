@@ -1,5 +1,18 @@
 if (global.hitstop > 0) exit;
 mask_index = spr_player_mask;
+
+// trava o player enquanto o editor estiver aberto
+if (instance_exists(obj_code_editor))
+{
+    hspd = 0;
+    vspd = 0;
+    image_speed = 0;
+
+    if (audio_is_playing(snd_walking)) audio_stop_sound(snd_walking);
+
+    exit;
+}
+
 if (instance_exists(obj_dialogue) && obj_dialogue.active)
 {
     hspd = 0;
@@ -13,7 +26,7 @@ if (instance_exists(obj_dialogue) && obj_dialogue.active)
     exit; 
 }
 
-// bloqueia o aspirador durante a luta com o mini boss
+
 var _luta_boss = instance_exists(obj_cabecao) && obj_cabecao.aggro;
 
 if (keyboard_check_pressed(ord("E")) && !global._tem_aspirador && !_luta_boss && !attacking)
@@ -35,6 +48,71 @@ if (keyboard_check_pressed(ord("E")) && !global._tem_aspirador && !_luta_boss &&
         }
     }
 }
+
+if (keyboard_check_pressed(ord("E")) && !attacking && pull_phase == 0 && !instance_exists(obj_code_editor))
+{
+    var pc = instance_nearest(x, y, obj_computador);
+
+    if (pc != noone)
+    {
+        var _pc_dist = point_distance(
+            clamp(x, pc.bbox_left, pc.bbox_right),
+            clamp(y, pc.bbox_top, pc.bbox_bottom),
+            x,
+            y
+        );
+
+        if (_pc_dist <= interact_range)
+        {
+            instance_create_depth(0, 0, -10000, obj_code_editor);
+            exit;
+        }
+    }
+}
+// coletar itens na ordem
+if (x_shake > 0) x_shake--;
+
+if (keyboard_check_pressed(ord("E")) && !attacking && pull_phase == 0 && global.item_step < 4)
+{
+    var _it_best = noone;
+    var _it_min = interact_range;
+
+    for (var _k = 0; _k < array_length(global.item_order); _k++)
+    {
+        var _it_obj = global.item_order[_k];
+        if (!instance_exists(_it_obj)) continue;
+
+        var _it_near = instance_nearest(x, y, _it_obj);
+        var _it_dist = point_distance(
+            clamp(x, _it_near.bbox_left, _it_near.bbox_right),
+            clamp(y, _it_near.bbox_top, _it_near.bbox_bottom),
+            x,
+            y
+        );
+
+        if (_it_dist <= _it_min)
+        {
+            _it_min = _it_dist;
+            _it_best = _it_near;
+        }
+    }
+
+    if (_it_best != noone)
+    {
+        if (item_idx(_it_best) == global.item_step)
+        {
+            
+            start_pickup(_it_best);
+        }
+        else
+        {
+            
+            x_shake = 15;
+            
+        }
+    }
+}
+
 if (instance_exists(obj_password_13))
 {
     hspd = 0;
@@ -139,7 +217,7 @@ kb_y = lerp(kb_y, 0, 0.2);
 if (abs(kb_x) < 0.1) kb_x = 0;
 if (abs(kb_y) < 0.1) kb_y = 0;
 
-// desencaixe de colisão (desligado durante a cena do aspirador)
+
 if (pull_phase == 0 && colidindo(x, y)) {
     var _livre = false;
     for (var r = 1; r <= 64 && !_livre; r++) {
@@ -223,7 +301,7 @@ if (_input_x != 0 || _input_y != 0) {
     dust_timer--;
 
     if (dust_timer <= 0) {
-        var p = instance_create_layer(x, y + 20, "Instances", obj_particles_wlk);
+        var p = instance_create_layer(x, y + 20, "Effects", obj_particles_wlk);
 
         p.x += irandom_range(-4, 4);
         p.y += irandom_range(-4, 4);

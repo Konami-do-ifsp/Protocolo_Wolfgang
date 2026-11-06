@@ -18,7 +18,7 @@ speaker_name = "";
 speaker_portrait = -1;
 
 
-// PRIMEIRO: carregar fala
+
 load_current_line = function()
 {
     var _line = dialogue[dialogue_index];
@@ -40,17 +40,17 @@ load_current_line = function()
 
         case "john":
             speaker_name = "John";
-            speaker_portrait = spr_john_portrait; // Certifica-te de que este sprite existe
+            speaker_portrait = spr_john_portrait; 
             break;
 
         case "mateus":
             speaker_name = "Sr. Mateus";
-            speaker_portrait = spr_mateus_portrait; // Certifica-te de que este sprite existe
+            speaker_portrait = spr_mateus_portrait; 
             break;
 
         case "fairy":
             speaker_name = "Fairy";
-            speaker_portrait = spr_fairy_portrait; // Certifica-te de que este sprite existe
+            speaker_portrait = spr_fairy_portrait; 
             break;
             
         default:
@@ -65,7 +65,7 @@ load_current_line = function()
 };
 
 
-// SEGUNDO: iniciar diálogo
+
 start_lines = function(_lines, _name)
 {
     dialogue = _lines;
@@ -83,7 +83,7 @@ start_lines = function(_lines, _name)
 };
 
 
-// TERCEIRO: avançar diálogo
+
 advance = function()
 {
     dialogue_index++;

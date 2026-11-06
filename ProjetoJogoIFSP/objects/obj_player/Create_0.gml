@@ -2,7 +2,16 @@ enum Weapon {
     ASPIRADOR,
     SWORD
 }
-interact_targets = [obj_npc_parent, Object25, obj_aspirador_preso]; 
+interact_targets = [obj_npc_parent, Object25, obj_aspirador_preso, obj_computador];
+if (!variable_global_exists("item_step")) global.item_step = 0;  
+if (!variable_global_exists("item_order")) global.item_order = [cpu, ssd, RAm, Placa_mae];
+
+x_shake = 0;
+pickup_idx = 0;
+global.item_order = [cpu, ssd, RAm, Placa_mae];
+pickup_sprites    = [spr_pegar_cpu, spr_pegar_ssd, spr_pegar_ram, spr_completado_itens];
+
+array_push(interact_targets, cpu, ssd, RAm, Placa_mae);
 interact_range = 64; 
 float_timer = 0;
 current_weapon = Weapon.SWORD;
@@ -34,15 +43,15 @@ kb_y = 0;
 som_aspirador = -1;
 pull_target_x = 0;
 pull_target_y = 0;
-pull_walk_spd = 3;     // velocidade ao andar até a pedra
-pull_offset_x = 0;     // ajuste fino se o player não ficar bem no meio
+pull_walk_spd = 3;     
+pull_offset_x = 0;     
 pull_offset_y = 0;
 pull_phase = 0;
 pull_timer = 0;
 pull_flash = 0;
 puxado = noone;
-pull_give_frame = 6;   // frame da animação em que o aspirador sai da pedra
-pull_hold = 40;        // frames segurando a pose final antes de liberar o player
+pull_give_frame = 6;   
+pull_hold = 40;        
 slide_max = 16;
 
 attacking = false;

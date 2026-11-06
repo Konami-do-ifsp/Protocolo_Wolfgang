@@ -17,10 +17,10 @@ draw_rectangle(
 
 draw_set_color(c_white);
 
-// Inventario
+
 var txtAspirador = "ASPIRADOR";
 var txtSword = "MARTELO";
-var txtHeal = "Cura: " + string(quantity_heal);
+
 
 var x_ = display_get_gui_width() - 16;
 var y_ = display_get_gui_height() - 16;
@@ -45,6 +45,5 @@ else
 
 draw_text(x_, y_ - 40, txtSword);
 
-// HEAL
+
 draw_set_font(fnt_gui);
-draw_text(x_, y_, txtHeal);
