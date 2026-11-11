@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocolo Wolfgang</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
     <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=VT323&display=swap');
 
 * {
     box-sizing: border-box;
@@ -16,7 +21,7 @@ html {
     scroll-behavior: smooth;
 }
 
-.body {
+body {
     margin: 0;
     background-color: black;
 }
@@ -33,102 +38,44 @@ main h2 {
 }
 
 section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 80px;
 }
 
-.header {
-    background-color: #3a3939;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid #00ff66;
-    width: 100%;
-    padding: 5px 25px;
+
+
+body::before {
+    content: "";
     position: fixed;
-    top: 0;
+    top: -384px;
     left: 0;
-    z-index: 1000;
-}
-
-.header h1 {
-    margin: 0;
-}
-
-.menu-hamburguer {
-    display: block;
-    background: none;
-    border: none;
-    color: #00ff66;
-    font-size: 35px;
-    cursor: pointer;
-}
-
-.botoes {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 5px;
-    min-width: 210px;
-    padding: 10px;
-    margin: 0;
-    background-color: #3a3939;
-    border: 1px solid #00ff66;
-    border-top: none;
-}
-
-.botoes.aberto {
-    display: flex;
-}
-
-.btn-normal {
-    appearance: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    min-width: 130px;
-    min-height: 50px;
-    padding: 10px;
-    border: 0;
-    border-radius: 8px;
-    background: #3a3939;
-    color: #aaaaaa;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.18s ease;
+    height: calc(100% + 384px);
+    background-image: url('ArquivosSite/fundo.png');
+    background-size: 384px 384px;
+    image-rendering: pixelated;
+    opacity: 0.65;              
+    pointer-events: none;
+    z-index: -1;
+    animation: fundo-descendo 60s linear infinite;
 }
 
-.btn-normal:hover {
-    color: #00ff66;
-    background: #151515;
-    text-shadow: 0 0 8px #00ff66;
+@keyframes fundo-descendo {
+    from { transform: translateY(0); }
+    to   { transform: translateY(384px); }
 }
 
-.glitch {
-    font-family: 'Orbitron', monospace;
-    font-size: 48px;
-    color: #ffffff;
-    position: relative;
-    animation: bug-sutil 3s infinite;
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
+    z-index: -1;
 }
 
-@keyframes bug-sutil {
-    0%, 88%, 94%, 100% {
-        transform: translate(0, 0);
-        text-shadow: none;
-    }
-    90% {
-        transform: translate(-2px, 1px);
-        text-shadow: 2px -1px #ff00c1, -2px 1px #00fff9;
-    }
-    92% {
-        transform: translate(1px, -1px);
-        text-shadow: -1px 2px #ff00c1, 2px -2px #00fff9;
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
     }
 }
 
@@ -154,22 +101,131 @@ section {
     }
 }
 
-.introducao {
+
+.header {
+    background-color: #3a3939;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
-    gap: 50px;
-    padding: 120px 10% 60px;
-    border-bottom: 1px solid #333;
-    scroll-margin-top: 100px;
+    justify-content: center;
+    border-bottom: 2px solid #00ff66;
+    width: 100%;
+    padding: 8px 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-.texto-introducao {
-    max-width: 550px;
+.logo-header {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 90px 20px 0;
+    line-height: 0;
+}
+
+.logo-header img {
+    display: block;
+    height: 350px;
+    width: auto;
+    max-width: 150%;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.btn-normal {
+    appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #3a3939;
+    color: #aaaaaa;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.18s ease;
+    font-family: 'Orbitron', monospace;
+}
+
+.btn-normal:hover {
+    color: #00ff66;
+    background: #151515;
+    text-shadow: 0 0 8px #00ff66;
+}
+
+
+.card,
+.card-storyboard,
+.card-doc,
+.card-integrante {
+    background-color: #151515;
+    border: 1px solid #333;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.card:hover,
+.card-storyboard:hover,
+.card-doc:hover,
+.card-integrante:hover {
+    border-color: #00ff66;
+    transform: translateY(-5px);
+}
+
+.cards-personagens,
+.cards-documentacao,
+.cards-integrantes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+
+    .introducao {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 50px;
+    padding: 40px 10% 80px;
+    border-bottom: 1px solid #333;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
+.jogabilidade {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 50px;
+    padding: 40px 10% 80px;
+    border-bottom: 1px solid #333;
+    align-items: center;
+    
+}
+   
+
+
+.texto-introducao {
+    flex: 1;
+    max-width: 550px;
+    text-align: left;
+}
+
 
 .texto-introducao p {
     color: rgb(196, 178, 178);
@@ -177,55 +233,18 @@ section {
     line-height: 1.6;
 }
 
-.imagem-introducao img {
-    width: 450px;
-    border-radius: 10px;
-    border: 2px solid #00ff66;
-}
-
-
-.personagens {
-    text-align: center;
-    padding: 60px 10%;
-    border-bottom: 1px solid #333;
-}
-
-.cards-personagens {
+.imagem-introducao {
+    flex: 1;
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
-.card {
-    width: 250px;
-    padding: 20px;
-    background-color: #151515;
-    border: 1px solid #333;
-    border-radius: 10px;
-    transition: 0.2s;
-}
-
-.card:hover {
-    border-color: #00ff66;
-    transform: translateY(-5px);
-}
-
-.card img {
+.imagem-introducao img {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.card h3 {
-    color: #00ff66;
-}
-
-.card p {
-    color: rgb(196, 178, 178);
-    line-height: 1.5;
+    max-width: 450px;
+    height: auto;
+    border: none;
 }
 
 
@@ -250,52 +269,61 @@ section {
 }
 
 .card-storyboard {
-    flex: 1 1 350px;
-    max-width: 520px;
+    flex: 1 1 450px;
+    max-width: 650px;
     padding: 20px;
-    background-color: #151515;
-    border: 1px solid #333;
-    border-radius: 10px;
-    transition: 0.2s;
-    
-}
-
-.card-storyboard:hover {
-    border-color: #00ff66;
-    transform: translateY(-5px);
-}
-
-.card-storyboard img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border: 1px solid #333;
-    border-radius: 8px;
-    cursor: pointer;
-    rotate: (-90deg);
-}
-.card-storyboard {
     overflow: hidden;
+}
+
+.card-storyboard h3 {
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
 }
 
 .card-storyboard a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 550px;
 }
 
-.card-storyboard img {
-    width: 350px;
-    height: 500px;
+
+     .card-storyboard img {
+    display: block;
+    width: 500px;
+    height: 550px;
     object-fit: contain;
+    border: 1px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
     transform: rotate(-90deg);
 }
 
-.card-storyboard h3 {
+.personagens {
+    text-align: center;
+    padding: 60px 10%;
+    border-bottom: 1px solid #333;
+}
+
+.card {
+    width: 250px;
+    padding: 20px;
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h3 {
     color: #00ff66;
-    font-family: 'Orbitron', monospace;
+}
+
+.card p {
+    color: rgb(196, 178, 178);
+    line-height: 1.5;
 }
 
 
@@ -309,91 +337,6 @@ section {
     font-size: 18px;
 }
 
-.gameplay video {
-    width: 80%;
-    max-width: 900px;
-    margin-top: 30px;
-    border: 2px solid #00ff66;
-    border-radius: 10px;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: #111;
-    border-top: 1px solid #333;
-    color: #aaaaaa;
-}
-
-.footer h3 {
-    color: #00ff66;
-    font-family: 'Orbitron', monospace;
-}
-
-.footer p {
-    font-size: 14px;
-}
-
-.footer a {
-    color: #00ff66;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-shadow: 0 0 8px #00ff66;
-}
-
-@media (max-width: 768px) {
-    .header {
-        padding: 5px 15px;
-    }
-
-    .header h1 {
-        font-size: clamp(20px, 5vw, 28px);
-    }
-
-    .menu-hamburguer {
-        font-size: 30px;
-    }
-
-    .botoes {
-        left: 0;
-        right: 0;
-        width: 100%;
-        min-width: 0;
-        padding: 10px 0;
-    }
-
-    .btn-normal {
-        border-radius: 0;
-    }
-
-    .cards-personagens {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .introducao {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .gameplay video {
-        width: 100%;
-    }
-
-    .cards-storyboards {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card-storyboard {
-        width: 100%;
-        max-width: 100%;
-        flex: none;
-    }
-}
 .gameplay iframe {
     width: 80%;
     max-width: 900px;
@@ -403,19 +346,29 @@ section {
     border-radius: 10px;
 }
 
-@media (max-width: 768px) {
-    .gameplay iframe {
-        width: 100%;
-    }
+
+    .aviso-video {
+    font-size: 14px;
 }
+
+.aviso-video a {
+    color: #00ff66;
+}
+
+.imagem-quebrada {
+    padding: 10px;
+    border: 1px dashed #ff00c1;
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+
 .codigo {
     text-align: center;
     padding: 50px 20px;
-    background: #000;
 }
 
 .codigo h2 {
-    color: #00ff66;
     font-family: 'Orbitron', sans-serif;
     margin-bottom: 30px;
 }
@@ -477,237 +430,573 @@ section {
 .ponto.ativo {
     background: #00ff66;
 }
+
+
+
+.documentacao,
+.integrantes {
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.documentacao {
+    padding: 60px 10%;
+}
+
+
+
+.documentacao > p,
+.integrantes > p {
+    color: #aaaaaa;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.card-doc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 300px;
+    padding: 25px 20px;
+}
+
+.card-doc h3 {
+    margin: 0;
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
+}
+
+.card-doc p {
+    margin: 0;
+    color: rgb(196, 178, 178);
+    line-height: 1.5;
+}
+
+.btn-doc {
+    margin-top: auto;
+    padding: 10px 18px;
+    border: 1px solid #00ff66;
+    border-radius: 8px;
+    color: #00ff66;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.18s ease;
+}
+
+.btn-doc:hover {
+    background: #00ff66;
+    color: black;
+}
+
+.integrantes {
+    padding: 60px 4%;
+}
+
+.card-integrante {
+    width: 200px;
+    padding: 25px 15px;
+}
+
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    border: 2px solid #00ff66;
+    border-radius: 50%;
+    background: #000;
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
+    font-size: 36px;
+    text-shadow: 0 0 8px #00ff66;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-integrante h3 {
+    margin: 0 0 8px;
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+}
+
+.card-integrante p {
+    margin: 0;
+    color: rgb(196, 178, 178);
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #111;
+    border-top: 1px solid #333;
+    color: #aaaaaa;
+}
+
+.footer h3 {
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+.footer a {
+    color: #00ff66;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-shadow: 0 0 8px #00ff66;
+}
+
+
+
+@media (max-width: 768px) {
+
+    section {
+        scroll-margin-top: 130px;
+    }
+
+    .header {
+        padding: 6px 8px;
+    }
+
+    .botoes {
+        gap: 4px;
+    }
+
+    .btn-normal {
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .logo-header {
+        padding-top: 140px;
+    }
+
+    .logo-header img {
+        height: 120px;
+    }
+
+    .introducao {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .cards-personagens,
+    .cards-storyboards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-storyboard {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .card-doc,
+    .card-integrante {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .gameplay iframe {
+        width: 100%;
+    }
+}
+.explicacao-codigo {
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    padding: 20px;
+    background-color: #151515;
+    border: 1px solid #333;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.explicacao-codigo:hover {
+    border-color: #00ff66;
+}
+
+.explicacao-codigo p {
+    margin: 0;
+    color: rgb(196, 178, 178);
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: left;
+}
     </style>
 </head>
-<body class="body">
+
+<body>
+
     <header class="header">
 
-    <h1 class="glitch">Protocolo Wolfgang</h1>
+        <nav class="botoes" id="menu">
+            <a href="#sobre" class="btn-normal">Sobre</a>
+            <a href="#storyboards" class="btn-normal">Storyboards</a>
+            <a href="#personagens" class="btn-normal">Personagens</a>
+            <a href="#jogabilidade" class="btn-normal">Jogabilidade</a>
+            <a href="#gameplay" class="btn-normal">Gameplay</a>
+            <a href="#codigo" class="btn-normal">Códigos</a>
+            <a href="#documentacao" class="btn-normal">Documentação</a>
+            <a href="#integrantes" class="btn-normal">Integrantes</a>
+        </nav>
 
-    <button class="menu-hamburguer" onclick="abrirMenu()">☰</button>
+    </header>
 
-    <div class="botoes" id="menu">
-        <a href="#sobre" class="btn-normal">Sobre</a>
-        <a href="#storyboards" class="btn-normal">Storyboards</a>
-        <a href="#personagens" class="btn-normal">Personagens</a>
-        <a href="#jogabilidade" class="btn-normal">Jogabilidade</a>
-        <a href="#gameplay" class="btn-normal">Gameplay</a>
-        <a href="#codigo" class="btn-normal">Códigos</a>
-    </div>
-
-</header>
+    <h1 class="logo-header">
+        <img src="ArquivosSite/Protocolo_Wolfgang_header.png" alt="Protocolo Wolfgang">
+    </h1>
 
     <main>
 
-    <section class="introducao" id="sobre">
+        
+        <section class="introducao" id="sobre">
 
-        <div class="texto-introducao">
-            <h2 class="glitch-subtitulo">Sobre o jogo</h2>
+            <div class="texto-introducao">
+                <h2 class="glitch-subtitulo">Sobre o jogo</h2>
+
+                <p>
+                    Você assume o papel de John Wolfgang, um jovem carpinteiro que vive em um mundo natural e simples.
+                    Após acordar em um ambiente prejudicado por números binários e estruturas futuristas, John embarca em uma jornada para entender a origem dessa transformação.
+                    Com a ajuda de Fairy, uma máquina falante construída por ele, John descobre segredos profundos sobre sua própria existência e o propósito do mundo onde vive.
+                </p>
+            </div>
+
+        </section>
+
+        <section class="storyboards" id="storyboards">
+
+            <h2 class="glitch-subtitulo">Storyboards</h2>
 
             <p>
-                Você assume o papel de John Wolfgang, um jovem carpinteiro que vive em um mundo natural e simples.
-                 Após acordar em um ambiente prejudicado por números binários e estruturas futuristas, John embarca em uma jornada para entender a origem dessa transformação.
-                  Com a ajuda de Fairy, uma máquina falante construída por ele, John descobre segredos profundos sobre sua própria existência e o propósito do mundo onde vive.
+                Para começar o nosso projeto foram criados storyboards para estabelecer a identidade visual do nosso jogo.
             </p>
 
-            <p>
-            </p>
-        </div>
+            <div class="cards-storyboards">
+
+                <div class="card-storyboard">
+                    <h3>Storyboard 01</h3>
+                    <a href="ArquivosSite/Storyboard1.jpeg" target="_blank">
+                        <img src="ArquivosSite/Storyboard1.jpeg" alt="Storyboard 1">
+                    </a>
+                </div>
+
+                <div class="card-storyboard">
+                    <h3>Storyboard 02</h3>
+                    <a href="ArquivosSite/Storyboard2.jpeg" target="_blank">
+                        <img src="ArquivosSite/Storyboard2.jpeg" alt="Storyboard 2">
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="personagens" id="personagens">
+
+            <h2 class="glitch-subtitulo">Personagens</h2>
+
+            <div class="cards-personagens">
+
+                <div class="card">
+                    <img src="ArquivosSite/jonh2.png" alt="John Wolfgang">
+                    <h3 class="glitch-subtitulo">John Wolfgang</h3>
+                    <p>
+                        Um jovem carpinteiro que acorda em um mundo corrompido por tecnologia e números binários,
+                        buscando entender o que aconteceu.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ArquivosSite/fairy.png" alt="Fairy">
+                    <h3 class="glitch-subtitulo">Fairy</h3>
+                    <p>
+                        Uma máquina falante construída por John que o acompanha na jornada e o ajuda a descobrir os segredos daquele mundo.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ArquivosSite/celular.png" alt="Celular">
+                    <h3 class="glitch-subtitulo">Celular</h3>
+                    <p>
+                        Um enorme aparelho esquelético, bem assustador, esconde algum tipo de segredo.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ArquivosSite/inimigo 2 tv grande.png" alt="Televisão">
+                    <h3 class="glitch-subtitulo">Televisão</h3>
+                    <p>
+                        Uma imensa máquina assustadora, aparenta ter cérebro humano.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ArquivosSite/inimigo1 tv.png" alt="Inimigo">
+                    <h3 class="glitch-subtitulo">Inimigo</h3>
+                    <p>
+                        Uma pequena máquina a primeira vista simpática, porém continua sendo um mistério.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="jogabilidade" id="jogabilidade">
+
+            <div class="texto-introducao">
+                <h2 class="glitch-subtitulo">Jogabilidade</h2>
+
+                <p>
+                    Estilo: Top-Down com exploração livre.
+                    <br><br>
+                    Progressão: Colete componentes de hardware para melhorar o inventário e desbloquear habilidades especiais.
+                    <br><br>
+                    Combate: Use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes.
+                    <br><br>
+                    Dungeons Educativas: Fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
+                    <br><br>
+                    Desafios: Cada Dungeon possui mecânicas únicas. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite.
+                </p>
+            </div>
+
+            <div>
+                <img src="ArquivosSite/sprite_lado.gif" alt="John Wolfgang em animação de ataque">
+            </div>
+
+        </section>
+
 
         
+        <section class="gameplay" id="gameplay">
 
-    </section>
+            <h2 class="glitch-subtitulo">Gameplay</h2>
+            <p>Vídeo da gameplay</p>
 
+            <iframe
+                src="https://drive.google.com/file/d/1TZsb6MELuBDqm40ymBc4yRW4NQxe_VQ1/preview"
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
 
-    <section class="storyboards" id="storyboards">
-
-    <h2 class="glitch-subtitulo">Storyboards</h2>
-
-    <p>
-        Para começar o nosso projeto foram criados storyboards para estabelecer a identidade visual do nosso jogo.
-    </p>
-
-    <div class="cards-storyboards">
-
-        <div class="card-storyboard">
-
-            <h3>Storyboard 01</h3>
-
-            <a href="ArquivosSite/Storyboard1.jpeg" target="_blank">
-                <img src="ArquivosSite/Storyboard1.jpeg" alt="Storyboard 1">
-            </a>
-
-            <p>
-                
+        
+            <p class="aviso-video">
+                O vídeo não carregou? <a href="https://drive.google.com/file/d/1TZsb6MELuBDqm40ymBc4yRW4NQxe_VQ1/view" target="_blank">Abra direto no Google Drive</a>.
             </p>
 
-        </div>
+        </section>
 
-        <div class="card-storyboard">
 
-            <h3>Storyboard 02</h3>
+    
+        <section class="codigo" id="codigo">
 
-            <a href="ArquivosSite/Storyboard2.jpeg" target="_blank">
-                <img src="ArquivosSite/Storyboard2.jpeg" alt="Storyboard 2">
-            </a>
+            <h2 class="glitch-subtitulo">Códigos</h2>
 
-            <p>
-                
-            </p>
+            <div class="carrossel" tabindex="0" aria-label="Carrossel com imagens do código do jogo">
+                <button class="seta anterior" onclick="mudar(-1)">&#10094;</button>
 
-        </div>
+                <div class="slides">
+                    <img src="ArquivosSite/codigo1.jpeg" alt="Código 1" class="slide ativo">
+                    <img src="ArquivosSite/codigo2.jpeg" alt="Código 2" class="slide">
+                    <img src="ArquivosSite/codigo3.jpeg" alt="Código 3" class="slide">
+                </div>
 
-    </div>
-
-</section>
-<section class="personagens" id="personagens">
-
-        <h2 class="glitch-subtitulo">Personagens</h2>
-
-        <div class="cards-personagens">
-
-            <div class="card">
-                <img src="ArquivosSite/jonh2.png" alt="Personagem 1">
-                <h3 class="glitch-subtitulo">Jonh Wolfgang</h3>
-                <p>
-                    Um jovem carpinteiro que acorda em um mundo corrompido por tecnologia e números binários,
-                     buscando entender o que aconteceu.
-                </p>
+                <button class="seta proximo" onclick="mudar(1)">&#10095;</button>
             </div>
 
-            <div class="card">
-                <img src="ArquivosSite/fairy.png" alt="Personagem 2">
-                <h3 class="glitch-subtitulo">Fairy</h3>
-                <p>
-                    Uma máquina falante construída por John que o acompanha na jornada e o ajuda a descobrir os segredos daquele mundo.
-                </p>
+        
+            <div class="indicadores">
+                <span class="ponto ativo" onclick="slideAtual(0)"></span>
+                <span class="ponto" onclick="slideAtual(1)"></span>
+                <span class="ponto" onclick="slideAtual(2)"></span>
             </div>
-             <div class="card">
-                <img src="ArquivosSite/celular.png" alt="Personagem 1">
-                <h3 class="glitch-subtitulo" id="personagens">Celular</h3>
-                <p>
-                    Um enorme aparelho esquelético, bem assustador, esconde algum tipo de segredo.
-                </p>
-            </div>
-             <div class="card">
-                <img src="ArquivosSite/inimigo 2 tv grande.png" alt="Personagem 1">
-                <h3 class="glitch-subtitulo">Televisão</h3>
-                <p>
-                    Uma imensa máquina assustadora, aparenta ter cérebro humano.
-                </p>
-            </div>
-             <div class="card">
-                <img src="ArquivosSite/inimigo1 tv.png" alt="Personagem 1">
-                <h3 class="glitch-subtitulo">Inimigo</h3>
-                <p>
-                    Uma pequena máquina a primeira vista simpática, porém continua sendo um mistério.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section class="introducao" id="jogabilidade">
-
-        <div class="texto-introducao">
-            <h2 class="glitch-subtitulo">Jogabilidade</h2>
-
-            <p>
-                Estilo: Top-Down com exploração livre.
-                <br><br>
-                Progressão: Colete componentes de hardware para melhorar o inventário e desbloquear habilidades especiais.
-                <br><br>
-                Combate: Use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes.
-                <br><br>
-                Dungeons Educativas: Fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
-                <br><br>
-                Desafios: Cada Dungeon possui mecânicas únicas. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite.
-            </p>
-
-    </section>
-    <section class="gameplay" id="gameplay">
-    <h2 class="glitch-subtitulo">Gameplay</h2>
-    <p>Vídeo da gameplay</p>
-
-    <iframe
-        src="https://drive.google.com/file/d/1TZsb6MELuBDqm40ymBc4yRW4NQxe_VQ1/preview"
-        allow="autoplay"
-        allowfullscreen>
-    </iframe>
-</section>
-<section class="codigo" id="codigo">
-    <h2 class="glitch-subtitulo">Códigos</h2>
-
-    <div class="carrossel">
-        <button class="seta anterior" onclick="mudar(-1)">&#10094;</button>
-
-        <div class="slides">
-    <img src="ArquivosSite/codigo1.jpeg" alt="Código 1" class="slide ativo">
-    <img src="ArquivosSite/codigo2.jpeg" alt="Código 2" class="slide">
-    <img src="ArquivosSite/codigo3.jpeg" alt="Código 3" class="slide">
+            <div class="explicacao-codigo">
+    <p>llalalalalalalalalalalalalalalalalallallalalllal</p>
 </div>
 
-        <button class="seta proximo" onclick="mudar(1)">&#10095;</button>
-    </div>
+        </section>
 
-    <div class="indicadores">
-        <span class="ponto ativo" onclick="slideAtual(0)"></span>
-        <span class="ponto" onclick="slideAtual(1)"></span>
-        <span class="ponto" onclick="slideAtual(2)"></span>
-    </div>
-</section>
+        <section class="documentacao" id="documentacao">
 
-</main>
+            <h2 class="glitch-subtitulo">Documentação</h2>
+
+            <p>
+                Aqui estão os documentos e o código-fonte do projeto.
+            </p>
+
+            <div class="cards-documentacao">
+
+                <div class="card-doc">
+                    <h3>Documento do projeto</h3>
+                    <p>Documentação completa do jogo.</p>
+                  
+                    <a class="btn-doc" href="ArquivosSite/Documentacao.pdf" target="_blank">Abrir documento</a>
+                </div>
+
+                <div class="card-doc">
+                    <h3>Repositório</h3>
+                    <p>Todo o código-fonte do Protocolo Wolfgang no GitHub.</p>
+                    <a class="btn-doc" href="https://github.com/Konami-do-ifsp/Protocolo_Wolfgang" target="_blank">Ver no GitHub</a>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="integrantes" id="integrantes">
+
+            <h2 class="glitch-subtitulo">Integrantes</h2>
+
+            <p>
+                Projeto desenvolvido por alunos do curso Técnico em Desenvolvimento de Sistemas do IFSP.
+            </p>
+
+            <div class="cards-integrantes">
+
+        
+                <div class="card-integrante">
+                    <div class="avatar"><span>DB</span></div>
+                    <h3>Davi Bayer</h3>
+                    <p>Web Designer</p>
+                </div>
+
+                <div class="card-integrante">
+                    <div class="avatar"><span>LM</span></div>
+                    <h3>Lian Matias</h3>
+                    <p>Documentalista</p>
+                </div>
+
+                <div class="card-integrante">
+                    <div class="avatar"><span>OA</span></div>
+                    <h3>Otávio Augusto</h3>
+                    <p>Líder e programador</p>
+                </div>
+
+                <div class="card-integrante">
+                    <div class="avatar"><span>RB</span></div>
+                    <h3>Rafael Bergson</h3>
+                    <p>Artista</p>
+                </div>
+
+                <div class="card-integrante">
+                    <div class="avatar"><span>TJ</span></div>
+                    <h3>Tito Jandozza</h3>
+                    <p>Programador</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
     <footer class="footer">
-    <h3>Protocolo Wolfgang</h3>
+        <h3>Protocolo Wolfgang</h3>
 
-    <p>Projeto desenvolvido por alunos do curso Técnico em Desenvolvimento de Sistemas.</p>
+        <p>Projeto desenvolvido por alunos do curso Técnico em Desenvolvimento de Sistemas.</p>
 
-    <h4>Integrantes</h4>
+        <h4>Integrantes</h4>
 
-    <p>
-        Davi Bayer<br>
-        Lian Matias<br>
-        Otávio Augusto<br>
-        Rafael Bergson<br>
-        Tito Jandozza
-    </p>
+        <p>
+            Davi Bayer<br>
+            Lian Matias<br>
+            Otávio Augusto<br>
+            Rafael Bergson<br>
+            Tito Jandozza
+        </p>
 
-    <p>IFSP — 2026</p>
+        <p>IFSP — 2026</p>
 
-    <p>
-        <a href="https://github.com/Konami-do-ifsp/Protocolo_Wolfgang.git" target="_blank">GitHub</a>
-    </p>
-</footer>
-<script>
-function abrirMenu() {
-    document.getElementById("menu").classList.toggle("aberto");
-}
-const imagens = [
-    "ArquivosSite/codigo1.jpeg",
-    "ArquivosSite/codigo2.jpeg",
-    "ArquivosSite/codigo3.jpeg"
-];
+        <p>
+            <a href="https://github.com/Konami-do-ifsp/Protocolo_Wolfgang" target="_blank">GitHub</a>
+        </p>
+    </footer>
 
-let atual = 0; 
 
-function mudar(direcao) {
-    const slides = document.querySelectorAll(".slide");
-    const pontos = document.querySelectorAll(".ponto");
-    
-   
-    slides[atual].classList.remove("ativo");
-    if (pontos[atual]) pontos[atual].classList.remove("ativo");
-    
-    atual = (atual + direcao + imagens.length) % imagens.length;
-    
-    slides[atual].classList.add("ativo");
-    if (pontos[atual]) pontos[atual].classList.add("ativo");
-}
-</script>
+    <script>
+
+        const carrossel = document.querySelector(".carrossel");
+        const slides = document.querySelectorAll(".slide");
+        const pontos = document.querySelectorAll(".ponto");
+        let atual = 0;
+
+        
+        function mostrarSlide(numero) {
+           
+            if (slides.length === 0) {
+                return;
+            }
+
+            slides[atual].classList.remove("ativo");
+            if (pontos[atual]) pontos[atual].classList.remove("ativo");
+
+            atual = ((numero % slides.length) + slides.length) % slides.length;
+
+            slides[atual].classList.add("ativo");
+            if (pontos[atual]) pontos[atual].classList.add("ativo");
+        }
+
+        
+        function mudar(direcao) {
+            mostrarSlide(atual + direcao);
+        }
+
+        
+        function slideAtual(numero) {
+            mostrarSlide(numero);
+        }
+
+        if (carrossel) {
+            carrossel.addEventListener("keydown", function (evento) {
+                if (evento.key === "ArrowLeft") mudar(-1);
+                if (evento.key === "ArrowRight") mudar(1);
+            });
+        }
+
+
+        
+        function marcarImagemQuebrada(imagem) {
+            imagem.classList.add("imagem-quebrada");
+            console.warn("Imagem não encontrada: " + imagem.getAttribute("src"));
+        }
+
+        document.querySelectorAll("img").forEach(function (imagem) {
+            if (imagem.complete && imagem.naturalWidth === 0) {
+                marcarImagemQuebrada(imagem);
+            }
+            imagem.addEventListener("error", function () {
+                marcarImagemQuebrada(imagem);
+            });
+        });
+
+    </script>
+
 </body>
 </html>
+
+
 
 
 
