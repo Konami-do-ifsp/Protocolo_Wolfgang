@@ -18,14 +18,15 @@ if (aberta == false)
             );
 
             if (_d <= obj_player.interact_range)
-            {
-				bag_remove("chave1");
-				
-                aberta = true;
-                sprite_index = porta_abrindo;
-                image_index = 0;
-                image_speed = 1;
-            }
+			{
+			    bag_remove("chave1");
+			    global.porta_dungeon1_aberta = true;
+
+			    aberta = true;
+			    sprite_index = porta_abrindo;
+			    image_index = 0;
+			    image_speed = 1;
+			}
         }
     }
 }
