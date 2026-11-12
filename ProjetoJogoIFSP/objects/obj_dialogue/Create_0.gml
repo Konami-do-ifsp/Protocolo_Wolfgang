@@ -36,7 +36,7 @@ load_current_line = function()
             break;
 		case "luk":
             speaker_name = "Luk";
-            speaker_portrait = -1;
+            speaker_portrait = rosto_luk;
             break;
         case "wolf":
             speaker_name = "Wolf";
@@ -67,6 +67,22 @@ load_current_line = function()
             speaker_name = "Cabeção";
             speaker_portrait = spr_cabecao_portrait_hard; 
             break;
+		case "claudia":
+		    speaker_name = "Claudia Milk";
+		    speaker_portrait = rosto_claudia;
+		    break;
+		case "leon":
+		    speaker_name = "Leon";
+		    speaker_portrait = rosto_leon;
+		    break;
+		case "alan":
+		    speaker_name = "Alan Turing";
+		    speaker_portrait = rosto_alan;
+		    break;
+		case "computador":
+		    speaker_name = "Computador";
+		    speaker_portrait = -1;
+		    break;
             
         default:
             speaker_name = speaker_id;

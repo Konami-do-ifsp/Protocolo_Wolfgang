@@ -15,6 +15,7 @@ with (obj_player)
         var _obj = interact_targets[i];
 
         if (_obj == obj_aspirador_preso && global._tem_aspirador) continue;
+		    if (instance_exists(obj_capsula) && obj_capsula.fase >= 1) exit;
         if (_obj == obj_local_construcao && (global.item_step < 4 || global.pc_construido)) continue;
 		if (!global.leu_bilhete && (_obj == cpu || _obj == ssd || _obj == RAm || _obj == Placa_mae)) continue;
 

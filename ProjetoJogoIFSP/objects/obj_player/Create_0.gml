@@ -5,7 +5,7 @@ enum Weapon {
 inv_sel = 0;
 inv_off = 0;
 inv_last_w = -1;
-interact_targets = [obj_npc_parent,obj_luk_final,obj_bilhete_chao_itens, Object25, obj_bilhete_chao_itens, obj_aspirador_preso,obj_local_construcao, obj_bau_parent, obj_porta_dungeon1, cpu, ssd, RAm, Placa_mae];
+interact_targets = [obj_npc_parent,obj_pc_quebrado,obj_luk_final,obj_bilhete_chao_itens, Object25, obj_bilhete_chao_itens, obj_aspirador_preso,obj_local_construcao, obj_bau_parent, obj_porta_dungeon1, cpu, ssd, RAm, Placa_mae];
 if (!variable_global_exists("item_step")) global.item_step = 0;  
 if (!variable_global_exists("item_order")) global.item_order = [cpu, ssd, RAm, Placa_mae];
 
@@ -40,7 +40,7 @@ canPlayDeathSound = true;
 current_weapon = Weapon.ASPIRADOR;
 quantity_heal = 0;
 ja_toco_som_espada = false;
-alvos_colisao = [obj_luk_final, Mesa_do_lucas,obj_collision,obj_porta_dungeon1,obj_mateus,Object8,Object11, Object5, Object4, Object12, Object10, Object13, Object14, Object18, Object19, Object20, obj_aspirador_preso, Object9, Object25];
+alvos_colisao = [obj_luk_final,obj_porta_dungeon_turing,obj_pc_quebrado,obj_capsula,Object34,obj_npc_parent,obj_alan,Object36,Object35,Object26, Object37, obj_bau_parent, Mesa_do_lucas,obj_collision,obj_porta_dungeon1,obj_mateus,Object8,Object11, Object5, Object4, Object12, Object10, Object13, Object14, Object18, Object19, Object20, obj_aspirador_preso, Object9, Object25];
 kb_x = 0;
 kb_y = 0;
 som_aspirador = -1;
@@ -87,7 +87,7 @@ bag_slot_spr = -1;
 bag_slot_sel_spr = -1;
 bag_arrow_spr = -1;
 
-if (!variable_global_exists("dmg_martelo")) global.dmg_martelo = 15;
+if (!variable_global_exists("dmg_martelo")) global.dmg_martelo = 3;
 if (!variable_global_exists("dmg_aspirador")) global.dmg_aspirador = 1;
 if (!instance_exists(obj_icone_interacao)) instance_create_depth(0, 0, -10000, obj_icone_interacao);
 if (!variable_global_exists("leu_bilhete")) global.leu_bilhete = false;

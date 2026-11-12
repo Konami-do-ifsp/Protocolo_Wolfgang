@@ -35,24 +35,31 @@ switch (state)
     case "idle":
         anim_p = 0;
 
-                if (!aggro)
+		if (!aggro)
+{
+    if (sem_fala)
+    {
+        if (point_distance(x, y, obj_player.x, obj_player.y) <= aggro_range)
         {
-            if (intro_feita)
-            {
-                
-                if (!obj_dialogue.active)
-                {
-                    aggro = true;
-                    timer = 0;
-                }
-            }
-            else if (point_distance(x, y, obj_player.x, obj_player.y) <= aggro_range && !obj_dialogue.active)
-            {
-                obj_dialogue.start_lines(get_dialogue(intro_id), "");
-                intro_feita = true;
-            }
-            break;
+            aggro = true;
+            timer = 0;
         }
+    }
+    else if (intro_feita)
+    {
+        if (!obj_dialogue.active)
+        {
+            aggro = true;
+            timer = 0;
+        }
+    }
+    else if (point_distance(x, y, obj_player.x, obj_player.y) <= aggro_range && !obj_dialogue.active)
+    {
+        obj_dialogue.start_lines(get_dialogue(intro_id), "");
+        intro_feita = true;
+    }
+    break;
+}
 
         timer++;
         if (timer >= (fast ? t_cooldown_fast : t_cooldown))

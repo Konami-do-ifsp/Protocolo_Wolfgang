@@ -121,7 +121,16 @@ if (_e && !attacking && pull_phase == 0)
         }
     }
 }
+if (instance_exists(Object37) && Object37.fase > 0)
+{
+    hspd = 0;
+    vspd = 0;
+    image_speed = 0;
 
+    if (audio_is_playing(snd_walking)) audio_stop_sound(snd_walking);
+
+    exit;
+}
 if (_e && !attacking && pull_phase == 0 && global.item_step < 4 && global.leu_bilhete)
 {
     var _objeto_da_vez = global.item_order[global.item_step];

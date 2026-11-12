@@ -32,5 +32,10 @@ if (abrindo == true && image_speed != 0)
         image_speed = 0;
         bag_add(item_id);
         global.baus_abertos[$ item_id] = true;
+		if (dialogo != "")
+		{
+		    if (!instance_exists(obj_dialogue)) instance_create_depth(0, 0, -10000, obj_dialogue);
+		    obj_dialogue.start_lines(get_dialogue(dialogo), "");
+		}
     }
 }

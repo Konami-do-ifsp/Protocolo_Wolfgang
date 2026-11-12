@@ -8,6 +8,10 @@ draw_rectangle(0, 0, _gw, _gh, false);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
+var _spr = object_get_sprite(Obj_Logo);
+logo_frame += sprite_get_speed(_spr) / game_get_speed(gamespeed_fps);
+
+draw_sprite_ext(_spr, logo_frame, _gw / 2, posicao_y + 150, 1, 1, 0, c_white, alpha);
 for (var c = 0; c < colunas; c++)
 {
     var _x = c * tam_letra + tam_letra / 2;

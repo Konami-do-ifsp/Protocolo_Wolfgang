@@ -1,6 +1,8 @@
+zoom = lerp(zoom, zoom_alvo, 0.04);
+camera_set_view_size(view_camera[0], round(largura_base * zoom), round(altura_base * zoom));
 
-var _alvo_x = obj_player.x - (camera_get_view_width(view_camera) / 2);
-var _alvo_y = obj_player.y - (camera_get_view_height(view_camera) / 2);
+var _alvo_x = obj_player.x - (camera_get_view_width(view_camera[0]) / 2);
+var _alvo_y = obj_player.y - (camera_get_view_height(view_camera[0]) / 2);
 
 x = lerp(x, _alvo_x, 0.1);
 y = lerp(y, _alvo_y, 0.1);
@@ -14,8 +16,8 @@ if (shake_time > 0)
 
     off_x = choose(-shake, shake) + random_range(-shake * 0.2, shake * 0.2);
     off_y = choose(-shake, shake) + random_range(-shake * 0.2, shake * 0.2);
- 
-    shake -= shake_fade; 
+
+    shake -= shake_fade;
 }
 else
 {

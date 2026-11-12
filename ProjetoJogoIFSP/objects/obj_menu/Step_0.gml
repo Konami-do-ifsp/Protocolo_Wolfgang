@@ -56,7 +56,7 @@ else {
             switch(_escolhido) {
                 case 0: 
                     audio_stop_sound(snd_musica_menu); 
-                    room_goto(room_luk); 
+                    room_goto(rm_intro)
                     break;
                 case 1: 
                     estado_menu = "opcoes";

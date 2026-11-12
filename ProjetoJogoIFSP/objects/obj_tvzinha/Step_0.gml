@@ -9,8 +9,8 @@ if (instance_exists(obj_player))
     var _dist = point_distance(x, y, obj_player.x, obj_player.y);
     var _dir = point_direction(x, y, obj_player.x, obj_player.y);
 
-    var _detect_range = 50;
-    var _attack_range = 7;
+    var _detect_range = 150;
+    var _attack_range = 15;
 
     if (_dist < _detect_range && _dist > _attack_range && stun <= 0 && wind <= 0)
     {

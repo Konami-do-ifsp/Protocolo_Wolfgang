@@ -10,7 +10,7 @@ if (instance_exists(obj_player))
     var dir = point_direction(x, y, obj_player.x, obj_player.y);
 
     
-    if (stun <= 0 && wind <= 0 && dist < 100 && dist > 5)
+    if (stun <= 0 && wind <= 0 && dist < 250 && dist > 5)
     {
         _tx = lengthdir_x(spd, dir);
         _ty = lengthdir_y(spd, dir);

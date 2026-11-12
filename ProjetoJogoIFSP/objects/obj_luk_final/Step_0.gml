@@ -6,7 +6,17 @@ if (!instance_exists(obj_dialogue)) instance_create_depth(0, 0, -10000, obj_dial
 switch (fase)
 {
     case 0:
-        if (!obj_dialogue.active && point_distance(x, y, obj_player.x, obj_player.y) <= 150)
+        if (!falou_inicio)
+        {
+            espera_inicio--;
+
+            if (espera_inicio <= 0 && !obj_dialogue.active)
+            {
+                obj_dialogue.start_lines(get_dialogue("luk_inicio"), "");
+                falou_inicio = true;
+            }
+        }
+        else if (!obj_dialogue.active && point_distance(x, y, obj_player.x, obj_player.y) <= 150)
         {
             obj_dialogue.start_lines(get_dialogue("luk_final_1"), "");
             fase = 1;
@@ -22,7 +32,7 @@ switch (fase)
         }
     break;
 
-        case 2:
+    case 2:
         image_blend = merge_color(image_blend, c_white, 0.08);
         espera--;
 
@@ -50,9 +60,17 @@ switch (fase)
     case 6:
         if (!obj_dialogue.active)
         {
+            obj_dialogue.start_lines(get_dialogue("luk_protocolo"), "");
+            fase = 7;
+        }
+    break;
+
+    case 7:
+        if (!obj_dialogue.active)
+        {
             with (obj_player) visible = false;
             instance_create_depth(0, 0, -10000, obj_efeito_binario);
-            fase = 7;
+            fase = 8;
         }
     break;
 }

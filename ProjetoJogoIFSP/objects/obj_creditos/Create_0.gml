@@ -1,5 +1,5 @@
 linhas = [
-    "##NOME DO JOGO",
+    "", "", "", "", "", "",
     "",
     "Um jogo feito por",
     "",
@@ -116,3 +116,5 @@ for (var c = 0; c < colunas; c++)
     col_vel[c] = random_range(2, 6);
     col_off[c] = irandom(codigo_len - 1);
 }
+
+logo_frame = 0;

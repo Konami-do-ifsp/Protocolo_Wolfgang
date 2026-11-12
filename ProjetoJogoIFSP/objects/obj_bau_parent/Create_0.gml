@@ -2,9 +2,10 @@ if (!variable_global_exists("baus_abertos")) global.baus_abertos = {};
 
 abrindo = false;
 item_id = "";
-spr_abrindo = -1;
+spr_abrindo = bau_abrindo;
 image_speed = 0;
 image_index = 0;
+dialogo = "";
 
 bau_checar = function()
 {

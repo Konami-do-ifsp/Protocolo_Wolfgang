@@ -121,11 +121,11 @@ land = function()
             instance_create_layer(x + irandom_range(-24, 24), y + irandom_range(-6, 6), "Effects", obj_particles_wlk);
     }
 };
-
+sem_fala = false;
 intro_id = "cabecao_intro";
 intro_feita = false;
 
-f (!variable_global_exists("cabecao_normal_morto")) global.cabecao_normal_morto = false;
+if (!variable_global_exists("cabecao_normal_morto")) global.cabecao_normal_morto = false;
 if (!variable_global_exists("cabecao_hard_morto")) global.cabecao_hard_morto = false;
 
 

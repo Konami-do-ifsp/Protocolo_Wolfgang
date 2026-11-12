@@ -6,3 +6,5 @@ pulso = 0;
 aura = 1;
 audio_stop_all();
 musica = audio_play_sound(snd_musica_sala_luk, 1, true);
+falou_inicio = false;
+espera_inicio = 30;
