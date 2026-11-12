@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite_ssd",
-    "path":"sprites/Sprite_ssd/Sprite_ssd.yy",
+    "name":"Sprite_ram",
+    "path":"sprites/Sprite_ram/Sprite_ram.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -5,7 +5,7 @@ if (bar_alpha < 0.01) exit;
 var _w = 420;
 var _h = 18;
 var _x = (display_get_gui_width() - _w) / 2;
-var _y = display_get_gui_height() - 56;
+var _y = display_get_gui_height() - 715;
 
 var _pct   = clamp(hp / max_hp, 0, 1);
 var _trail = clamp(hp_trail / max_hp, 0, 1);

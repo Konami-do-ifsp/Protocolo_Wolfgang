@@ -289,6 +289,7 @@ function start_pickup(_inst)
 		case RAm: _spr = spr_pegar_ssd; break;
 	    case Placa_mae: _spr = spr_completado_itens; break;
 	}
+	image_xscale = 1
 	sprite_index = _spr;
 	show_debug_message("objeto=" + object_get_name(_inst_obj) + " sprite=" + sprite_get_name(sprite_index));
     image_index = 0;
@@ -302,7 +303,6 @@ function start_pickup(_inst)
 
 function state_pickup()
 {
-    
     invencible = true;
     inv_timer = 2;
 
@@ -310,5 +310,149 @@ function state_pickup()
     {
         attacking = false;
         state = state_idle;
+
+        if (global.item_step >= 4)
+        {
+            if (!instance_exists(obj_dialogue)) instance_create_depth(0, 0, -10000, obj_dialogue);
+            obj_dialogue.start_lines(get_dialogue("john_voltar_bilhete"), "");
+        }
     }
+}
+function start_construir()
+{
+    global.pc_construido = true;
+
+    dir = "side";
+    image_xscale = 1;
+
+    sprite_index = spr_player_construindo;
+    image_index = 0;
+    image_speed = 1;
+    kb_x = 0;
+    kb_y = 0;
+    attacking = true;
+    state = state_construir;
+}
+
+function state_construir()
+{
+    invencible = true;
+    inv_timer = 2;
+
+    if (animation_end())
+    {
+        image_speed = 0;
+        image_index = image_number - 1;
+        attacking = false;
+        state = state_idle;
+
+        instance_create_layer(x - 80, y, "Instances", obj_fairy_invocada);
+    }
+}
+function bag_has(_id)
+{
+    if (!variable_global_exists("bag")) return false;
+
+    for (var i = 0; i < array_length(global.bag); i++)
+    {
+        if (global.bag[i] == _id) return true;
+    }
+    return false;
+}
+
+function bag_add(_id)
+{
+    if (!variable_global_exists("bag")) global.bag = [];
+
+    var _known = false;
+    for (var i = 0; i < array_length(global.item_db); i++)
+    {
+        if (global.item_db[i].id == _id) { _known = true; break; }
+    }
+
+    if (!_known)
+    {
+        show_debug_message("bag_add: o item '" + string(_id) + "' nao existe no catalogo (scr_itens)");
+        return false;
+    }
+
+    if (bag_has(_id)) return false;
+
+    array_push(global.bag, _id);
+    return true;
+}
+
+function bag_remove(_id)
+{
+    if (!variable_global_exists("bag")) return;
+
+    for (var i = 0; i < array_length(global.bag); i++)
+    {
+        if (global.bag[i] == _id)
+        {
+            array_delete(global.bag, i, 1);
+            return;
+        }
+    }
+}
+
+function bag_rect(_x1, _y1, _x2, _y2, _col)
+{
+    if (_x2 <= _x1 || _y2 <= _y1) return;
+    draw_set_color(_col);
+    draw_rectangle(floor(_x1), floor(_y1), floor(_x2) - 1, floor(_y2) - 1, false);
+}
+
+function bag_chamfer(_x1, _y1, _x2, _y2, _p, _col)
+{
+    bag_rect(_x1 + _p, _y1, _x2 - _p, _y2, _col);
+    bag_rect(_x1, _y1 + _p, _x2, _y2 - _p, _col);
+}
+
+function bag_panel(_x1, _y1, _x2, _y2, _p, _edge, _fill, _light, _dark)
+{
+    bag_chamfer(_x1, _y1 + _p, _x2, _y2 + _p, _p, make_color_rgb(10, 8, 16));
+    bag_chamfer(_x1, _y1, _x2, _y2, _p, _edge);
+    bag_rect(_x1 + _p, _y1 + _p, _x2 - _p, _y2 - _p, _fill);
+    bag_rect(_x1 + _p, _y1 + _p, _x2 - _p, _y1 + _p * 2, _light);
+    bag_rect(_x1 + _p, _y1 + _p, _x1 + _p * 2, _y2 - _p, _light);
+    bag_rect(_x1 + _p, _y2 - _p * 2, _x2 - _p, _y2 - _p, _dark);
+    bag_rect(_x2 - _p * 2, _y1 + _p, _x2 - _p, _y2 - _p, _dark);
+}
+
+function bag_arrow(_x, _y, _dir, _p, _col)
+{
+    for (var k = 0; k < 4; k++)
+    {
+        var _half = (3 - k) * _p + _p / 2;
+        var _a = _x + k * _p * _dir;
+        var _b = _x + (k + 1) * _p * _dir;
+        bag_rect(min(_a, _b), _y - _half, max(_a, _b), _y + _half, _col);
+    }
+}
+
+function bag_draw_spr(_spr, _cx, _cy, _scale, _blend, _flip = 1)
+{
+    var _x = _cx + (sprite_get_xoffset(_spr) - sprite_get_width(_spr) / 2) * _scale * _flip;
+    var _y = _cy + (sprite_get_yoffset(_spr) - sprite_get_height(_spr) / 2) * _scale;
+    draw_sprite_ext(_spr, 0, floor(_x), floor(_y), _scale * _flip, _scale, 0, _blend, 1);
+}
+
+function luta_boss()
+{
+    return instance_exists(obj_cabecao) && obj_cabecao.aggro;
+}
+
+function bag_selected(_id)
+{
+    if (!variable_global_exists("bag")) return false;
+    if (!instance_exists(obj_player)) return false;
+
+    var _n = array_length(global.bag);
+    if (_n <= 0) return false;
+
+    var _s = clamp(obj_player.bag_sel, 0, _n - 1);
+
+    if (global.bag[_s] == _id) return true;
+    return false;
 }

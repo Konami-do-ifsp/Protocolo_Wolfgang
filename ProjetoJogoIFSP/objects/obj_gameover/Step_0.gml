@@ -35,7 +35,10 @@ if (keyboard_check_pressed(vk_enter))
     switch (opcao)
     {
         case 0:
-            room_goto(Room1);
+            if (variable_global_exists("ultima_sala") && room_exists(global.ultima_sala)) room_goto(global.ultima_sala);
+            else {
+				room_goto(Room1);
+			}
         break;
 
         case 1:

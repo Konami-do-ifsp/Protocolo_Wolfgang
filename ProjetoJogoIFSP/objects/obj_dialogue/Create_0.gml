@@ -1,3 +1,5 @@
+persistent = true
+
 active = false;
 
 dialogue = [];
@@ -32,7 +34,10 @@ load_current_line = function()
             speaker_name = "Joao";
             speaker_portrait = spr_mateus_portrait;
             break;
-
+		case "luk":
+            speaker_name = "Luk";
+            speaker_portrait = -1;
+            break;
         case "wolf":
             speaker_name = "Wolf";
             speaker_portrait = spr_john_portrait;
@@ -51,6 +56,16 @@ load_current_line = function()
         case "fairy":
             speaker_name = "Fairy";
             speaker_portrait = spr_fairy_portrait; 
+            break;
+		
+		case "cabecao":
+            speaker_name = "Cabeção";
+            speaker_portrait = spr_cabecao_portrait; 
+            break;
+			
+		case "cabecao_hard":
+            speaker_name = "Cabeção";
+            speaker_portrait = spr_cabecao_portrait_hard; 
             break;
             
         default:

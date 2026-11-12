@@ -1,5 +1,5 @@
 event_inherited();
-event_inherited();
+
 
 
 if (hp < hp_prev) trail_timer = 30;   
@@ -35,12 +35,21 @@ switch (state)
     case "idle":
         anim_p = 0;
 
-        if (!aggro)
+                if (!aggro)
         {
-            if (point_distance(x, y, obj_player.x, obj_player.y) <= aggro_range)
+            if (intro_feita)
             {
-                aggro = true;
-                timer = 0;
+                
+                if (!obj_dialogue.active)
+                {
+                    aggro = true;
+                    timer = 0;
+                }
+            }
+            else if (point_distance(x, y, obj_player.x, obj_player.y) <= aggro_range && !obj_dialogue.active)
+            {
+                obj_dialogue.start_lines(get_dialogue(intro_id), "");
+                intro_feita = true;
             }
             break;
         }

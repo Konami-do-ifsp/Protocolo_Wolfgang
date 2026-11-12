@@ -1,0 +1,1 @@
+if (instance_exists(obj_player)) obj_player.bilhete_cd = 5;

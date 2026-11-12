@@ -31,7 +31,7 @@ state_dur = 1;
 fast      = false;
 combo_left = 0;
 aggro      = false;
-aggro_range = 220;
+aggro_range = 60;
 
 start_x = x;  start_y = y;
 target_x = x; target_y = y;
@@ -121,3 +121,29 @@ land = function()
             instance_create_layer(x + irandom_range(-24, 24), y + irandom_range(-6, 6), "Effects", obj_particles_wlk);
     }
 };
+
+intro_id = "cabecao_intro";
+intro_feita = false;
+
+f (!variable_global_exists("cabecao_normal_morto")) global.cabecao_normal_morto = false;
+if (!variable_global_exists("cabecao_hard_morto")) global.cabecao_hard_morto = false;
+
+
+if (object_index == obj_cabecao && global.cabecao_normal_morto)
+{
+    if (!global.cabecao_hard_morto)
+    {
+        var _spawn_x = x;
+        var _spawn_y = y;
+
+        if (instance_exists(obj_ponto_cabecao_hard))
+        {
+            _spawn_x = obj_ponto_cabecao_hard.x;
+            _spawn_y = obj_ponto_cabecao_hard.y;
+        }
+
+        instance_create_layer(_spawn_x, _spawn_y, "Instances", obj_cabecao_hard);
+    }
+
+    instance_destroy(id, false); 
+}

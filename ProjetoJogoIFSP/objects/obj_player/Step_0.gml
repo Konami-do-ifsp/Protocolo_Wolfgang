@@ -1,8 +1,21 @@
 if (global.hitstop > 0) exit;
+if (bilhete_cd > 0) bilhete_cd--;
+//var para ver se apertou E para interagir
+var _e = keyboard_check_pressed(ord("E")) && !luta_boss();
+
+if (instance_exists(obj_bilhete_tela))
+{
+    hspd = 0;
+    vspd = 0;
+    image_speed = 0;
+
+    if (audio_is_playing(snd_walking)) audio_stop_sound(snd_walking);
+
+    exit;
+}
 mask_index = spr_player_mask;
 
-// trava o player enquanto o editor estiver aberto
-if (instance_exists(obj_code_editor))
+if (instance_exists(obj_luk_final) && obj_luk_final.fase > 0)
 {
     hspd = 0;
     vspd = 0;
@@ -17,19 +30,54 @@ if (instance_exists(obj_dialogue) && obj_dialogue.active)
 {
     hspd = 0;
     vspd = 0;
-    image_speed = 0; 
-    
+    image_speed = 0;
+
     if (audio_is_playing(snd_walking)) {
         audio_stop_sound(snd_walking);
     }
-    
-    exit; 
+
+    exit;
+}
+if (instance_exists(obj_fairy_invocada) && obj_fairy_invocada.invocando)
+{
+    hspd = 0;
+    vspd = 0;
+    image_speed = 0;
+
+    if (audio_is_playing(snd_walking)) {
+        audio_stop_sound(snd_walking);
+    }
+
+    exit;
 }
 
 
-var _luta_boss = instance_exists(obj_cabecao) && obj_cabecao.aggro;
+if (keyboard_check_pressed(vk_space))
+{
+    if (!attacking && !exploding && hp > 0 && bag_selected("cpu_item"))
+    {
+        bag_remove("cpu_item");
+        global.dmg_martelo += 5;
+        global.dmg_aspirador += 1;
 
-if (keyboard_check_pressed(ord("E")) && !global._tem_aspirador && !_luta_boss && !attacking)
+        global.hitstop = 15;
+
+        with (obj_camera)
+        {
+            shake = 8;
+            shake_time = 24;
+            shake_fade = 0.5;
+        }
+    }
+}
+if (keyboard_check_pressed(vk_space) && !attacking && !exploding && bilhete_cd <= 0 && bag_selected("bilhete_chao"))
+{
+    instance_create_depth(0, 0, -10000, obj_bilhete_tela);
+	global.leu_bilhete = true
+   
+}
+
+if (_e && !global._tem_aspirador && !attacking)
 {
     var _aspirador = instance_nearest(x, y, obj_aspirador_preso);
 
@@ -49,70 +97,71 @@ if (keyboard_check_pressed(ord("E")) && !global._tem_aspirador && !_luta_boss &&
     }
 }
 
-if (keyboard_check_pressed(ord("E")) && !attacking && pull_phase == 0 && !instance_exists(obj_code_editor))
-{
-    var pc = instance_nearest(x, y, obj_computador);
 
-    if (pc != noone)
-    {
-        var _pc_dist = point_distance(
-            clamp(x, pc.bbox_left, pc.bbox_right),
-            clamp(y, pc.bbox_top, pc.bbox_bottom),
-            x,
-            y
-        );
 
-        if (_pc_dist <= interact_range)
-        {
-            instance_create_depth(0, 0, -10000, obj_code_editor);
-            exit;
-        }
-    }
-}
-// coletar itens na ordem
 if (x_shake > 0) x_shake--;
 
-if (keyboard_check_pressed(ord("E")) && !attacking && pull_phase == 0 && global.item_step < 4)
+if (_e && !attacking && pull_phase == 0)
 {
-    var _it_best = noone;
-    var _it_min = interact_range;
+    var _b = instance_nearest(x, y, obj_bilhete_chao_itens);
 
-    for (var _k = 0; _k < array_length(global.item_order); _k++)
+    if (_b != noone)
     {
-        var _it_obj = global.item_order[_k];
-        if (!instance_exists(_it_obj)) continue;
-
-        var _it_near = instance_nearest(x, y, _it_obj);
-        var _it_dist = point_distance(
-            clamp(x, _it_near.bbox_left, _it_near.bbox_right),
-            clamp(y, _it_near.bbox_top, _it_near.bbox_bottom),
+        var _bd = point_distance(
+            clamp(x, _b.bbox_left, _b.bbox_right),
+            clamp(y, _b.bbox_top, _b.bbox_bottom),
             x,
             y
         );
 
-        if (_it_dist <= _it_min)
+        if (_bd <= interact_range)
         {
-            _it_min = _it_dist;
-            _it_best = _it_near;
-        }
-    }
-
-    if (_it_best != noone)
-    {
-        if (item_idx(_it_best) == global.item_step)
-        {
-            
-            start_pickup(_it_best);
-        }
-        else
-        {
-            
-            x_shake = 15;
-            
+            bag_add("bilhete_chao");
+            instance_destroy(_b);
         }
     }
 }
 
+if (_e && !attacking && pull_phase == 0 && global.item_step < 4 && global.leu_bilhete)
+{
+    var _objeto_da_vez = global.item_order[global.item_step];
+    var _peca_mais_proxima = noone;
+    var _menor_distancia = interact_range;
+
+    for (var _numero_da_peca = 0; _numero_da_peca < array_length(global.item_order); _numero_da_peca++)
+    {
+        var _peca = instance_nearest(x, y, global.item_order[_numero_da_peca]);
+        if (_peca == noone) continue;
+
+        var _distancia_ate_peca = point_distance(
+            clamp(x, _peca.bbox_left, _peca.bbox_right),
+            clamp(y, _peca.bbox_top, _peca.bbox_bottom),
+            x,
+            y
+        );
+
+        if (_distancia_ate_peca <= _menor_distancia)
+        {
+            _menor_distancia = _distancia_ate_peca;
+            _peca_mais_proxima = _peca;
+        }
+    }
+
+    if (_peca_mais_proxima != noone)
+    {
+        if (_peca_mais_proxima.object_index == _objeto_da_vez) start_pickup(_peca_mais_proxima);
+        else x_shake = 15;
+    }
+}
+if (_e && !attacking && pull_phase == 0 && global.item_step >= 4 && !global.pc_construido)
+{
+    var _local = instance_nearest(x, y, obj_local_construcao);
+
+    if (_local != noone && point_distance(x, y, _local.x, _local.y) <= interact_range)
+    {
+        start_construir();
+    }
+}
 if (instance_exists(obj_password_13))
 {
     hspd = 0;
@@ -127,7 +176,7 @@ if (instance_exists(obj_password_13))
     exit;
 }
 
-if (keyboard_check_pressed(ord("E")) && !global.object25_unlocked && !attacking)
+if (_e && !global.object25_unlocked && !attacking)
 {
     var _door = instance_nearest(x, y, Object25);
 
@@ -154,8 +203,9 @@ if (keyboard_check_pressed(ord("E")) && !global.object25_unlocked && !attacking)
 }
 else
 {
-    image_speed = 1; 
+    image_speed = 1;
 }
+
 if (hp <= 0 && !exploding)
 {
     state = state_explode;
@@ -183,6 +233,30 @@ if (!attacking && !exploding) {
         current_weapon = Weapon.SWORD;
     }
 }
+
+var _bn = array_length(global.bag);
+
+if (_bn > bag_last_n)
+{
+    bag_sel = _bn - 1;
+    bag_off = 1;
+}
+bag_last_n = _bn;
+bag_sel = clamp(bag_sel, 0, max(0, _bn - 1));
+
+if (!attacking && !exploding && _bn > 1)
+{
+    var _bdir = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
+
+    if (_bdir != 0)
+    {
+        bag_sel = (bag_sel + _bdir + _bn) mod _bn;
+        bag_off = _bdir;
+    }
+}
+
+bag_off = lerp(bag_off, 0, 0.25);
+if (abs(bag_off) < 0.01) bag_off = 0;
 
 hp_anim = lerp(hp_anim, hp, 0.1);
 var mx = mouse_x;
@@ -216,7 +290,6 @@ kb_x = lerp(kb_x, 0, 0.2);
 kb_y = lerp(kb_y, 0, 0.2);
 if (abs(kb_x) < 0.1) kb_x = 0;
 if (abs(kb_y) < 0.1) kb_y = 0;
-
 
 if (pull_phase == 0 && colidindo(x, y)) {
     var _livre = false;

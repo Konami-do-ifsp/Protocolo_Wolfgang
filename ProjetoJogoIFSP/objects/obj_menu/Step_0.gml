@@ -2,9 +2,9 @@ animacao_entrada = lerp(animacao_entrada, 1, 0.1);
 
 //TELA DE CREDITOS
 if (estado_menu == "creditos") {
-    creditos_y -= 1.5; // velocidade que o texto sobe
+    creditos_y -= 1.5; 
     
-    // Aperte enter para sair dos creditos
+    
     if (keyboard_check_pressed(vk_enter)) {
         estado_menu = "principal";
         opcoes = menu_principal;
@@ -56,7 +56,7 @@ else {
             switch(_escolhido) {
                 case 0: 
                     audio_stop_sound(snd_musica_menu); 
-                    room_goto(cenario1); 
+                    room_goto(room_luk); 
                     break;
                 case 1: 
                     estado_menu = "opcoes";

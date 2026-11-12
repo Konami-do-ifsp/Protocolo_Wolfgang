@@ -1,6 +1,8 @@
 event_inherited();
+if (global.hitstop > 0) exit;
 
-
+var _tx = 0;
+var _ty = 0;
 
 if (instance_exists(obj_player))
 {
@@ -10,80 +12,33 @@ if (instance_exists(obj_player))
     var _detect_range = 50;
     var _attack_range = 7;
 
-    
-    if (_dist < _detect_range)
+    if (_dist < _detect_range && _dist > _attack_range && stun <= 0 && wind <= 0)
     {
-        
-        if (_dist > _attack_range)
-        {
-            
-            x += lengthdir_x(spd, _dir);
-            y += lengthdir_y(spd, _dir);
+        _tx = lengthdir_x(spd, _dir);
+        _ty = lengthdir_y(spd, _dir);
 
-            
-            if (obj_player.y < y)
-            {
-                sprite_index = spr_tv_walk_back;
-            }
-            else
-            {
-                sprite_index = spr_tv_walk;
-            }
+        if (obj_player.y < y)
+        {
+            sprite_index = spr_tv_walk_back;
         }
-
-
-
-        _dist = point_distance(x, y, obj_player.x, obj_player.y);
-
-        if (_dist <= _attack_range)
+        else
         {
-            if (can_attack && !obj_player.invencible && obj_player.hp > 0)
-            {
-                _dir = point_direction(x, y, obj_player.x, obj_player.y);
-
-                obj_player.hp -= 2;
-                audio_play_sound(snd_player_hitted, 1, false);
-
-                can_attack = false;
-
-
-                with (obj_camera)
-                {
-                    shake = 3;
-                    shake_time = 6;
-                    shake_fade = 1;
-                }
-
-
-                global.hitstop = 4;
-
-                var _kb_x = lengthdir_x(2, _dir);
-                var _kb_y = lengthdir_y(2, _dir);
-
-                with (obj_player)
-                {
-                    kb_x += _kb_x;
-                    kb_y += _kb_y;
-
-                    flash_timer = 20;
-                    invencible = true;
-                    inv_timer = 30;
-                }
-
-                alarm[0] = 30;
-            }
+            sprite_index = spr_tv_walk;
         }
     }
+
+    update_attack(_attack_range);
 }
 
-
+mv_x = lerp(mv_x, _tx, 0.15);
+mv_y = lerp(mv_y, _ty, 0.15);
+x += mv_x;
+y += mv_y;
 
 if (hit_timer > 0)
 {
     hit_timer--;
 }
-
-
 
 kb_x = lerp(kb_x, 0, 0.2);
 kb_y = lerp(kb_y, 0, 0.2);

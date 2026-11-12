@@ -1,4 +1,4 @@
-if (point_distance(x, y, obj_player.x, obj_player.y) <= 150)
+if (point_distance(x, y, obj_player.x, obj_player.y) <= 80)
 {
     if (keyboard_check_pressed(ord("E")) && !obj_dialogue.active)
     {
@@ -10,10 +10,10 @@ if (point_distance(x, y, obj_player.x, obj_player.y) <= 150)
 }
 else
 {
-    // Não precisamos fazer nada aqui
+    
 }
 
-// Detecta encerramento somente quando o diálogo realmente terminou
+
 if (was_talking && !obj_dialogue.active)
 {
     if (obj_dialogue.npc_name == npc_name)
