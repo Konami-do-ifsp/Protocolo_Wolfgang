@@ -19,6 +19,8 @@ if (aberta == false)
 
             if (_d <= obj_player.interact_range)
             {
+				bag_remove("chave1");
+				
                 aberta = true;
                 sprite_index = porta_abrindo;
                 image_index = 0;
