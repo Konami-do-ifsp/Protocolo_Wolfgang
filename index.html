@@ -168,7 +168,6 @@ body::after {
 
 
 .card,
-.card-storyboard,
 .card-doc,
 .card-integrante {
     background-color: #151515;
@@ -178,7 +177,6 @@ body::after {
 }
 
 .card:hover,
-.card-storyboard:hover,
 .card-doc:hover,
 .card-integrante:hover {
     border-color: #00ff66;
@@ -196,7 +194,7 @@ body::after {
 }
 
 
-    .introducao {
+.introducao {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -217,15 +215,12 @@ body::after {
     align-items: center;
     
 }
-   
-
 
 .texto-introducao {
     flex: 1;
     max-width: 550px;
     text-align: left;
 }
-
 
 .texto-introducao p {
     color: rgb(196, 178, 178);
@@ -248,55 +243,158 @@ body::after {
 }
 
 
-.storyboards {
-    text-align: center;
+.processo {
     padding: 60px 10%;
     border-bottom: 1px solid #333;
+    text-align: center;
 }
 
-.storyboards p {
+.processo > p {
+    max-width: 800px;
+    margin: 0 auto;
     color: #aaaaaa;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-.cards-storyboards {
+.linha-processo {
+    position: relative;
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding-left: 50px;
+    text-align: left;
+}
+
+.linha-processo::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 18px;
+    width: 2px;
+    background: linear-gradient(#00ff66, #333);
+}
+
+.etapa {
+    position: relative;
+    margin-bottom: 50px;
+    padding: 25px;
+    background-color: #151515;
+    border: 1px solid #333;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.etapa:last-child {
+    margin-bottom: 0;
+}
+
+.etapa:hover {
+    border-color: #00ff66;
+}
+
+.etapa-numero {
+    position: absolute;
+    top: 22px;
+    left: -50px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.card-storyboard {
-    flex: 1 1 450px;
-    max-width: 650px;
-    padding: 20px;
-    overflow: hidden;
-}
-
-.card-storyboard h3 {
+    width: 38px;
+    height: 38px;
+    border: 2px solid #00ff66;
+    border-radius: 50%;
+    background: #000;
     color: #00ff66;
     font-family: 'Orbitron', monospace;
+    font-size: 16px;
+    text-shadow: 0 0 8px #00ff66;
 }
 
-.card-storyboard a {
+.etapa h3 {
+    margin: 0 0 12px;
+    color: #00ff66;
+    font-family: 'Orbitron', monospace;
+    font-size: 24px;
+}
+
+.etapa p {
+    margin: 0;
+    color: rgb(196, 178, 178);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.etapa-imagens {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 550px;
+    gap: 20px;
+    margin-top: 25px;
 }
 
-
-     .card-storyboard img {
+.etapa-imagens a {
     display: block;
-    width: 500px;
-    height: 550px;
-    object-fit: contain;
+    line-height: 0;
+}
+
+.etapa-imagens img {
+    display: block;
+    max-width: 100%;
     border: 1px solid #333;
     border-radius: 8px;
-    cursor: pointer;
-    transform: rotate(-90deg);
+    background: #000;
+    transition: 0.2s;
+}
+
+.etapa-imagens img:hover {
+    border-color: #00ff66;
+}
+.etapa-storyboards a {
+    position: relative;
+    width: 480px;
+    height: 340px;
+    overflow: hidden;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #000;
+}
+
+.etapa-storyboards img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 340px;
+    height: 480px;
+    max-width: none;
+    object-fit: contain;
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+.etapa-quadro img {
+    width: 480px;
+    height: 340px;
+    max-width: 100%;
+    object-fit: contain;
+}
+.etapa-personagens img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.etapa-cenario img {
+    width: 100%;
+    max-width: 384px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+.etapa-sprites img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    image-rendering: pixelated;
 }
 
 .personagens {
@@ -347,7 +445,7 @@ body::after {
 }
 
 
-    .aviso-video {
+.aviso-video {
     font-size: 14px;
 }
 
@@ -442,8 +540,6 @@ body::after {
 .documentacao {
     padding: 60px 10%;
 }
-
-
 
 .documentacao > p,
 .integrantes > p {
@@ -565,28 +661,66 @@ body::after {
 
 
 
+.hamburguer {
+    display: none;
+}
+
 @media (max-width: 768px) {
 
-    section {
-        scroll-margin-top: 130px;
+    .header {
+        padding: 8px 12px;
+        justify-content: flex-end;
     }
 
-    .header {
-        padding: 6px 8px;
+    .hamburguer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        background: #3a3939;
+        border: 1px solid #00ff66;
+        border-radius: 8px;
+        cursor: pointer;
     }
+
+    .hamburguer span {
+        display: block;
+        height: 3px;
+        background: #00ff66;
+        border-radius: 2px;
+        box-shadow: 0 0 6px #00ff66;
+        transition: 0.25s;
+    }
+
+    .hamburguer.aberto span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburguer.aberto span:nth-child(2) { opacity: 0; }
+    .hamburguer.aberto span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
     .botoes {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
         gap: 4px;
+        padding: 8px;
+        background: #3a3939;
+        border-bottom: 2px solid #00ff66;
+    }
+
+    .botoes.aberto {
+        display: flex;
     }
 
     .btn-normal {
-        min-height: 36px;
-        padding: 6px 10px;
-        font-size: 14px;
-    }
-
-    .logo-header {
-        padding-top: 140px;
+        justify-content: flex-start;
+        min-height: 44px;
+        font-size: 16px;
     }
 
     .logo-header img {
@@ -599,16 +733,9 @@ body::after {
         gap: 20px;
     }
 
-    .cards-personagens,
-    .cards-storyboards {
+    .cards-personagens {
         flex-direction: column;
         align-items: center;
-    }
-
-    .card-storyboard {
-        width: 100%;
-        max-width: 100%;
-        flex: none;
     }
 
     .card-doc,
@@ -617,9 +744,47 @@ body::after {
         max-width: 320px;
     }
 
+    .processo {
+        padding: 60px 5%;
+    }
+
+    .linha-processo {
+        padding-left: 40px;
+    }
+
+    .linha-processo::before {
+        left: 13px;
+    }
+
+    .etapa {
+        padding: 18px;
+    }
+
+    .etapa-numero {
+        left: -40px;
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .etapa-storyboards img {
+        width: 100%;
+        height: auto;
+    }
+
     .gameplay iframe {
         width: 100%;
     }
+    .etapa-storyboards a {
+    width: 100%;
+    max-width: 300px;
+    height: 212px;
+}
+
+.etapa-storyboards img {
+    width: 212px;
+    height: 300px;
+}
 }
 .explicacao-codigo {
     max-width: 1000px;
@@ -642,6 +807,12 @@ body::after {
     line-height: 1.6;
     text-align: left;
 }
+.gifizinho{
+   height: 400px;        
+  width: auto;
+  max-width: 100%;     
+  image-rendering: pixelated;
+}
     </style>
 </head>
 
@@ -649,9 +820,15 @@ body::after {
 
     <header class="header">
 
+        <button class="hamburguer" id="btn-hamburguer" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav class="botoes" id="menu">
             <a href="#sobre" class="btn-normal">Sobre</a>
-            <a href="#storyboards" class="btn-normal">Storyboards</a>
+            <a href="#processo" class="btn-normal">Processo Criativo</a>
             <a href="#personagens" class="btn-normal">Personagens</a>
             <a href="#jogabilidade" class="btn-normal">Jogabilidade</a>
             <a href="#gameplay" class="btn-normal">Gameplay</a>
@@ -683,29 +860,74 @@ body::after {
 
         </section>
 
-        <section class="storyboards" id="storyboards">
+        <section class="processo" id="processo">
 
-            <h2 class="glitch-subtitulo">Storyboards</h2>
+            <h2 class="glitch-subtitulo">Processo Criativo</h2>
 
             <p>
-                Para começar o nosso projeto foram criados storyboards para estabelecer a identidade visual do nosso jogo.
+                Protocolo Wolfgang começou apenas como uma ideia, mas aos poucos fomos colocando ela em prática, venha ver como foi:
             </p>
 
-            <div class="cards-storyboards">
+            <div class="linha-processo">
 
-                <div class="card-storyboard">
-                    <h3>Storyboard 01</h3>
-                    <a href="ArquivosSite/Storyboard1.jpeg" target="_blank">
-                        <img src="ArquivosSite/Storyboard1.jpeg" alt="Storyboard 1">
-                    </a>
-                </div>
+                <article class="etapa">
+                    <span class="etapa-numero">1</span>
+                    <h3>Tudo começou no papel</h3>
+                    <p>
+                        Antes de começar de fato a programar nosso jogo, sentamos e discutimos o rumo que o jogo ia tomar. Após isso, começamos a botar nossas ideias no papel.
+                    </p>
+                    <div class="etapa-imagens etapa-storyboards">
+                        <a href="ArquivosSite/Storyboard1.jpeg" target="_blank">
+                            <img src="ArquivosSite/Storyboard1.jpeg" alt="Storyboard 1">
+                        </a>
+                        <a href="ArquivosSite/Storyboard2.jpeg" target="_blank">
+                            <img src="ArquivosSite/Storyboard2.jpeg" alt="Storyboard 2">
+                        </a>
+                    </div>
+                </article>
 
-                <div class="card-storyboard">
-                    <h3>Storyboard 02</h3>
-                    <a href="ArquivosSite/Storyboard2.jpeg" target="_blank">
-                        <img src="ArquivosSite/Storyboard2.jpeg" alt="Storyboard 2">
-                    </a>
+                <article class="etapa">
+                    <span class="etapa-numero">2</span>
+                    <h3>Dando vida aos personagens</h3>
+                    <p>
+                      Com os primeiros conceitos definidos, precisávamos começar a dar vida aos nossos personagens. Era hora de criar quem ia nos acompanhar nessa aventura. Cada personagem foi desenhando pensando no mínimos detalhes, cada um com sua identidade própria.
+                    </p>
+
+                    <div class="etapa-imagens etapa-quadro">
+                        <a href="ArquivosSite/luk desenho.jpeg" target="_blank">
+                            <img src="ArquivosSite/luk desenho.jpeg" alt="Storyboard 1">
+                        </a>
+                        <a href="ArquivosSite/Personagens.jpeg" target="_blank">
+                            <img src="ArquivosSite/Personagens.jpeg" alt="Storyboard 2">
+                        </a>
+                    </div>
+                    
+                </article>
+
+                <article class="etapa">
+                    <span class="etapa-numero">3</span>
+                    <h3>Construindo o cenário</h3>
+                    <p>
+                        Depois dos personagens, tinhamos que criar o cenário. Ele foi construído de forma a passar a sensação de que o player está em um mundo bugado, diferente e errado.
+                    </p>
+                    <div class="etapa-imagens etapa-cenario">
+                        <img src="ArquivosSite/cenario.gif" alt="Cenário do jogo">
+                    </div>
+                </article>
+
+                <article class="etapa">
+                    <span class="etapa-numero">4</span>
+                    <h3>Do desenho ao sprite final</h3>
+                    <p>
+                        Por fim, passamos os personagens do papel para o computador. Cada personagem foi desenvolvido com pixel art tendo suas próprias animações.
+                    </p>
+                    <div class="etapa-imagens etapa-sprites">
+                    <img src="ArquivosSite/luk_parado.gif" alt="Sprite 1">
+                    <img src="ArquivosSite/cabecao_preview_pulo.gif" alt="Sprite 2">
+                    <img src="ArquivosSite/john_wolfgang_piscadinha_64px.gif" alt="Sprite 3">
+                    <img src="ArquivosSite/spr_celular_walk_down.gif" alt="Sprite 4">
                 </div>
+                </article>
 
             </div>
 
@@ -736,7 +958,7 @@ body::after {
 
                 <div class="card">
                     <img src="ArquivosSite/celular.png" alt="Celular">
-                    <h3 class="glitch-subtitulo">Celular</h3>
+                    <h3 class="glitch-subtitulo">Mr. Telephone Man</h3>
                     <p>
                         Um enorme aparelho esquelético, bem assustador, esconde algum tipo de segredo.
                     </p>
@@ -744,7 +966,7 @@ body::after {
 
                 <div class="card">
                     <img src="ArquivosSite/inimigo 2 tv grande.png" alt="Televisão">
-                    <h3 class="glitch-subtitulo">Televisão</h3>
+                    <h3 class="glitch-subtitulo">Cabeção</h3>
                     <p>
                         Uma imensa máquina assustadora, aparenta ter cérebro humano.
                     </p>
@@ -752,9 +974,16 @@ body::after {
 
                 <div class="card">
                     <img src="ArquivosSite/inimigo1 tv.png" alt="Inimigo">
-                    <h3 class="glitch-subtitulo">Inimigo</h3>
+                    <h3 class="glitch-subtitulo">Tenna</h3>
                     <p>
                         Uma pequena máquina a primeira vista simpática, porém continua sendo um mistério.
+                    </p>
+                </div>
+                <div class="card">
+                    <img src="ArquivosSite/luk_64.png" alt="Inimigo">
+                    <h3 class="glitch-subtitulo">Luk</h3>
+                    <p>
+                       O velho ancião da vila, infelizmente está desaparecido.
                     </p>
                 </div>
 
@@ -769,19 +998,25 @@ body::after {
                 <h2 class="glitch-subtitulo">Jogabilidade</h2>
 
                 <p>
-                    Estilo: Top-Down com exploração livre.
-                    <br><br>
-                    Progressão: Colete componentes de hardware para melhorar o inventário e desbloquear habilidades especiais.
-                    <br><br>
-                    Combate: Use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes.
-                    <br><br>
-                    Dungeons Educativas: Fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
-                    <br><br>
-                    Desafios: Cada Dungeon possui mecânicas únicas. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite.
+                    Jogabilidade
+
+        Estilo: Top-Down
+        <br>
+        <br>
+        Progressão: Colete componentes de hardware para melhorar o inventário e desbloquear habilidades especiais. (siga a historia completando os objetivos e passando pelas dungeons)
+        <br>
+        <br>
+        Combate: Use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes.(combate usando a marreta de john e melhore suas estatisticas usando itens encontrados pelo mapa)
+        <br>
+        <br>
+        Dungeons Educativas: Fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
+        <br>
+        <br>
+        Desafios: Cada Dungeon possui mecânicas únicas. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite.(cada dungeon possui mecanicas unicas, envolvendo desafios envolvendo as materias do curso tecnico. Em uma dungeon etmos q converter decimal para binario)
                 </p>
             </div>
 
-            <div>
+            <div class="gifizinho">
                 <img src="ArquivosSite/sprite_lado.gif" alt="John Wolfgang em animação de ataque">
             </div>
 
@@ -832,7 +1067,7 @@ body::after {
                 <span class="ponto" onclick="slideAtual(2)"></span>
             </div>
             <div class="explicacao-codigo">
-    <p>llalalalalalalalalalalalalalalalalallallalalllal</p>
+    <p></p>
 </div>
 
         </section>
@@ -851,7 +1086,7 @@ body::after {
                     <h3>Documento do projeto</h3>
                     <p>Documentação completa do jogo.</p>
                   
-                    <a class="btn-doc" href="ArquivosSite/Documentacao.pdf" target="_blank">Abrir documento</a>
+                    <a class="btn-doc" href="ArquivosSite/doc.pdf" target="_blank">Abrir documento</a>
                 </div>
 
                 <div class="card-doc">
@@ -876,31 +1111,31 @@ body::after {
 
         
                 <div class="card-integrante">
-                    <div class="avatar"><span>DB</span></div>
+                 <div class="avatar"><img src="ArquivosSite/foto eu.jpeg" alt="Davi Bayer"></div>   
                     <h3>Davi Bayer</h3>
                     <p>Web Designer</p>
                 </div>
 
                 <div class="card-integrante">
-                    <div class="avatar"><span>LM</span></div>
+                    <div class="avatar"><img src="ArquivosSite/foto lian.jpeg" alt="Davi Bayer"></div>   
                     <h3>Lian Matias</h3>
                     <p>Documentalista</p>
                 </div>
 
                 <div class="card-integrante">
-                    <div class="avatar"><span>OA</span></div>
+                    <div class="avatar"><img src="ArquivosSite/foto otavio.jpeg" alt="Davi Bayer"></div>
                     <h3>Otávio Augusto</h3>
-                    <p>Líder e programador</p>
+                    <p>Líder e Programador</p>
                 </div>
 
                 <div class="card-integrante">
-                    <div class="avatar"><span>RB</span></div>
+                    <div class="avatar"><img src="ArquivosSite/foto rafael.jpeg" alt="Davi Bayer"></div>
                     <h3>Rafael Bergson</h3>
                     <p>Artista</p>
                 </div>
 
                 <div class="card-integrante">
-                    <div class="avatar"><span>TJ</span></div>
+                    <div class="avatar"><img src="ArquivosSite/foto tito.jpeg" alt="Davi Bayer"></div>
                     <h3>Tito Jandozza</h3>
                     <p>Programador</p>
                 </div>
@@ -916,16 +1151,6 @@ body::after {
         <h3>Protocolo Wolfgang</h3>
 
         <p>Projeto desenvolvido por alunos do curso Técnico em Desenvolvimento de Sistemas.</p>
-
-        <h4>Integrantes</h4>
-
-        <p>
-            Davi Bayer<br>
-            Lian Matias<br>
-            Otávio Augusto<br>
-            Rafael Bergson<br>
-            Tito Jandozza
-        </p>
 
         <p>IFSP — 2026</p>
 
@@ -988,6 +1213,26 @@ body::after {
             }
             imagem.addEventListener("error", function () {
                 marcarImagemQuebrada(imagem);
+            });
+        });
+
+        const btnHamburguer = document.getElementById("btn-hamburguer");
+        const menu = document.getElementById("menu");
+
+        function alternarMenu(abrir) {
+            const aberto = menu.classList.toggle("aberto", abrir);
+            btnHamburguer.classList.toggle("aberto", aberto);
+            btnHamburguer.setAttribute("aria-expanded", aberto);
+            btnHamburguer.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+        }
+
+        btnHamburguer.addEventListener("click", function () {
+            alternarMenu();
+        });
+
+        menu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                alternarMenu(false);
             });
         });
 
