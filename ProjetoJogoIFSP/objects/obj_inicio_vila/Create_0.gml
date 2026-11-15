@@ -1,0 +1,1 @@
+iniciou = false;
