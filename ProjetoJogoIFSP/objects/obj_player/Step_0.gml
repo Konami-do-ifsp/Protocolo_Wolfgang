@@ -1,3 +1,42 @@
+if (saindo_da_casa)
+{
+    var _vel_intro = 0.5; 
+    var _dist = point_distance(x, y, spawn_x, spawn_y);
+
+    if (_dist > _vel_intro)
+    {
+        var _dir = point_direction(x, y, spawn_x, spawn_y);
+        x += lengthdir_x(_vel_intro, _dir);
+        y += lengthdir_y(_vel_intro, _dir);
+
+        sprite_index = spr_player_walk_front;
+        image_speed = 1;
+
+        if (!audio_is_playing(snd_walking))
+            audio_play_sound(snd_walking, 1, true);
+    }
+    else
+    {
+        x = spawn_x;
+        y = spawn_y;
+
+        if (audio_is_playing(snd_walking))
+            audio_stop_sound(snd_walking);
+
+        sprite_index = jhon_assutado; 
+        image_speed = 1;
+
+        susto_timer++;
+
+        if (susto_timer >= 60)
+        {
+            saindo_da_casa = false;
+            global.intro_casa_feita = true;
+        }
+    }
+
+    exit;
+}
 if (global.hitstop > 0) exit;
 if (bilhete_cd > 0) bilhete_cd--;
 //var para ver se apertou E para interagir

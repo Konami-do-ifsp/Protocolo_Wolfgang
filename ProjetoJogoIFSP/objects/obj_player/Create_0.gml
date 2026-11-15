@@ -95,3 +95,17 @@ bilhete_cd = 0;
 
 
 global.ultima_sala = room;
+if (!variable_global_exists("intro_casa_feita")) global.intro_casa_feita = false;
+
+saindo_da_casa = false;
+susto_timer = 0;
+
+if (room == cenario1 && !global.intro_casa_feita)
+{
+    spawn_x = x;
+    spawn_y = y;
+
+    y = spawn_y - 50;
+
+    saindo_da_casa = true;
+}
