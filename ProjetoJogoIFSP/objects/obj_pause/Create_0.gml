@@ -2,7 +2,7 @@ pausado = false;
 estado_menu = "principal"; 
 
 // listas de opcoees
-menu_principal = ["Continuar", "Opcoes", "Menu Principal", "Sair"];
+menu_principal = ["Continuar", "Opcoes", "Menu Principal", "Sair", "Salvar"];
 menu_opcoes = ["Tela Cheia: OFF", "FPS: 60", "Volume: 100%", "Voltar"];
 
 opcoes_pause = menu_principal;

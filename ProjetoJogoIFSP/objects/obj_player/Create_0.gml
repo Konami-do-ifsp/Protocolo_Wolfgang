@@ -75,7 +75,21 @@ if (!variable_global_exists("bag")) global.bag = [];
 bag_sel = 0;
 bag_off = 0;
 bag_last_n = array_length(global.bag);
+global.ultima_sala = room;
+if (!variable_global_exists("intro_casa_feita")) global.intro_casa_feita = false;
 
+saindo_da_casa = false;
+susto_timer = 0;
+
+if (room == cenario1 && !global.intro_casa_feita)
+{
+    spawn_x = x;
+    spawn_y = y;
+
+    y = spawn_y - 50;
+
+    saindo_da_casa = true;
+}
 bag_big = 80;
 bag_small = 40;
 bag_gap = 90;
@@ -93,5 +107,4 @@ if (!instance_exists(obj_icone_interacao)) instance_create_depth(0, 0, -10000, o
 if (!variable_global_exists("leu_bilhete")) global.leu_bilhete = false;
 bilhete_cd = 0;
 
-
-global.ultima_sala = room;
+aplicar_save();
