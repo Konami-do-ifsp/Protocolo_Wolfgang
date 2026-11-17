@@ -84,7 +84,7 @@ if (estado_menu == "principal") {
     var _logo_y = (_gui_h * 0.45) + _flutuar_y; 
     
     var _pulso_scale = sin(current_time / 500) * 0.02; 
-    var _scale_base = 0.62; 
+    var _scale_base = 3.2; // <-- ajuste fino aqui (teste 2.5 ou 2.7)
     var _scale = (_scale_base + _pulso_scale) * animacao_entrada; 
     
     var _alpha = animacao_entrada;

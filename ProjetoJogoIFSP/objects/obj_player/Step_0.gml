@@ -1,3 +1,4 @@
+if (global.hitstop > 0) exit;
 if (saindo_da_casa)
 {
     var _vel_intro = 0.5; 
@@ -37,7 +38,6 @@ if (saindo_da_casa)
 
     exit;
 }
-if (global.hitstop > 0) exit;
 if (bilhete_cd > 0) bilhete_cd--;
 //var para ver se apertou E para interagir
 var _e = keyboard_check_pressed(ord("E")) && !luta_boss();
@@ -254,20 +254,29 @@ else
     image_speed = 1;
 }
 
+
 if (hp <= 0 && !exploding)
 {
     state = state_explode;
 }
-if (hp <= 0) {
+
+
+state();
+
+
+if (hp <= 0) 
+{
     hp = 0;
     can_attack = false;
-    if (canPlayDeathSound) {
+    
+    if (canPlayDeathSound) 
+    {
         audio_play_sound(snd_explosion, 1, false);
-        alarm[1] = 40;
         canPlayDeathSound = false;
     }
 }
-state();
+
+
 
 if (current_weapon == Weapon.ASPIRADOR && !tem_aspirador()) {
     current_weapon = Weapon.SWORD;
@@ -307,6 +316,15 @@ bag_off = lerp(bag_off, 0, 0.25);
 if (abs(bag_off) < 0.01) bag_off = 0;
 
 hp_anim = lerp(hp_anim, hp, 0.1);
+
+if (hp < hp_prev) {
+    dano_timer = 20;
+    dano_de = hp_prev;
+    dano_ate = hp;
+}
+hp_prev = hp;
+
+if (dano_timer > 0) dano_timer--;
 var mx = mouse_x;
 var my = mouse_y;
 
@@ -322,12 +340,10 @@ var _pode_mover = (!attacking && !exploding);
 var _input_x = _pode_mover ? keyboard_check(ord("D")) - keyboard_check(ord("A")) : 0;
 var _input_y = _pode_mover ? keyboard_check(ord("S")) - keyboard_check(ord("W")) : 0;
 
-var _spd_atual = (room == cenario1) ? spd * 0.75 : spd;
-
 if (_input_x != 0 || _input_y != 0) {
     var _direcao = point_direction(0, 0, _input_x, _input_y);
-    hspd = lengthdir_x(_spd_atual, _direcao);
-    vspd = lengthdir_y(_spd_atual, _direcao);
+    hspd = lengthdir_x(spd, _direcao);
+    vspd = lengthdir_y(spd, _direcao);
 } else {
     hspd = 0;
     vspd = 0;

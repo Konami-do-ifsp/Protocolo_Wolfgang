@@ -1,10 +1,8 @@
 if (!instance_exists(obj_player)) exit;
 
-
-if (dialogue_id == "alan_intro" && global.alan_salvo
-    && point_distance(x, y, obj_player.x, obj_player.y) <= 80)
+if (global.alan_salvo && dialogue_id == "alan_intro")
 {
-    dialogue_id = "alan_fim";
+    dialogue_id = "alan_done";
 }
 
 event_inherited();

@@ -77,8 +77,14 @@ if (pausado) {
                     room_goto(menu_inicial); 
                     break;
                     
-                case 3: 
+               case 3: 
                     game_end();
+                    break;
+                case 4:
+                    instance_activate_object(obj_player);
+                    save_jogo();
+                    pausado = false;
+                    instance_activate_all();
                     break;
             }
         }

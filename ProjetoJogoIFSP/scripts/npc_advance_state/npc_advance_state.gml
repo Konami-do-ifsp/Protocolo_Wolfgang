@@ -35,20 +35,23 @@ function npc_advance_state(_npc_id, _current_state)
 		    break;
 			
 		case "alan":
-		    if (_current_state == "alan_intro")
-		    {
-		        bag_add("tecla_4");
-		        global.alan_ajudado = true;
-		        
-		       
-		        if (!instance_exists(obj_soldier_spawner))
-		        {
-		            instance_create_layer(x, y, "Instances", obj_soldier_spawner);
-		        }
-		        
-		        return "alan_done";
-		    }
-		    break;
+            if (_current_state == "alan_intro" && !global.alan_salvo)
+            {
+                if (!instance_exists(obj_soldier_spawner))
+                {
+                    instance_create_layer(x, y, "Instances", obj_soldier_spawner);
+                }
+
+                return "alan_intro";
+            }
+
+            if (global.alan_salvo && !global.alan_ajudado)
+            {
+                bag_add("tecla_4");
+                global.alan_ajudado = true;
+                return "alan_done";
+            }
+            break;
     }
 
     return _current_state;

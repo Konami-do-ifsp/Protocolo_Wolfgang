@@ -1,5 +1,5 @@
 estado_menu = "principal";
-menu_principal = ["Jogar", "Opcoes", "Creditos", "Sair"];
+menu_principal = ["Jogar", "Opcoes", "Creditos", "Sair", "Continuar", "Apagar Save"];
 menu_opcoes = ["Tela Cheia: OFF", "FPS: 60", "Volume: 100%", "Voltar"]; 
 
 opcoes = menu_principal;

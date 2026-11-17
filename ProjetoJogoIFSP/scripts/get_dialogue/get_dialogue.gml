@@ -29,9 +29,13 @@ function get_dialogue(_id)
                     text: "Certo, se achar meus passarinhos me avise. Ah, tem algo que quero te dar."
                 },
                 {
-                    speaker: "mateus",
-                    text: "Achei isso grudado na máquina colorida, talvez te ajude.\n\n[Bilhete: \"Dois símbolos me dão vida: um representa o início, outro a ausência. Embora conte como qualquer número, não sigo as regras dos dez. Para descobrir meu segredo, transforme 13 em minha linguagem.\"]"
-                },
+				    speaker: "mateus",
+					   text: "Achei isso grudado na máquina colorida, talvez te ajude."
+				},
+				{
+					speaker: "mateus",
+						text: "[Bilhete: \"Dois símbolos me dão vida: um representa o início, outro a ausência. Embora conte como qualquer número, não sigo as regras dos dez. Para descobrir meu segredo, transforme 13 em minha linguagem.\"]"
+				},
                 {
                     speaker: "john",
                     text: "Obrigado Sr. Mateus."
@@ -293,6 +297,14 @@ function get_dialogue(_id)
 		    return [
 		        {speaker: "alan", text: "Ei! Tem alguém aí fora? Por favor, me ajudem!\nEntrem na sala, rápido!"},
 		        {speaker: "john", text: "Tem alguém pedindo ajuda lá dentro! Vamos entrar."}
+		    ];
+			
+		case "bau_cpu":
+		    return [
+		        {speaker: "fairy", text: "Ei John, sabe isso que você acabou de pegar? Isso é uma CPU, a Unidade Central de Processamento.\nEla funciona como o cérebro de um computador. É responsável por processar instruções, realizar cálculos e coordenar as operações do sistema."},
+		        {speaker: "john", text: "Legal, o que eu faço com isso?"},
+		        {speaker: "fairy", text: "Uma CPU potente consegue processar informações de uma forma bem mais eficaz! Se você utilizar ela, vai conseguir se movimentar melhor e interpretar o movimento do inimigo com mais rapidez.\nDe acordo com meus cálculos, utilizando a CPU seu martelo causará 5 de dano a mais.\nAperte espaço para utilizar."},
+				{speaker: "fairy", text: "Aperte espaço para utilizar."}
 		    ];
     }
 

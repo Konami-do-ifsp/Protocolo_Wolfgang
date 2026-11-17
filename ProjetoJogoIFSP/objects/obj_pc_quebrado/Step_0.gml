@@ -1,3 +1,7 @@
+if (global.pc_consertado) image_blend = c_white;
+
+else image_blend = make_color_rgb(255, 130, 130);
+
 if (!instance_exists(obj_player)) exit;
 
 var _fps_alvo = fps_quebrado;

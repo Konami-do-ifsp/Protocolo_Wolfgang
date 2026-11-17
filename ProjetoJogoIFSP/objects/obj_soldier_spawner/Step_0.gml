@@ -36,16 +36,22 @@ if (tempo_restante > 0)
 else
 {
     global.alan_salvo = true;
-    
+
+    if (!global.alan_ajudado)
+    {
+        bag_add("tecla_4");
+        global.alan_ajudado = true;
+    }
+
     with (obj_soldado) {
         instance_destroy();
     }
-    
+
     if (!instance_exists(obj_dialogue)) 
     {
         instance_create_depth(0, 0, -10000, obj_dialogue);
     }
     obj_dialogue.start_lines(get_dialogue("alan_fim"), "alan");
-    
+
     instance_destroy();
 }

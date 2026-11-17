@@ -2,7 +2,7 @@ event_inherited();
 
 hp = 60;
 max_hp = 60;
-
+atk_damage =2
 
 t_windup        = 20;
 t_air           = 34;

@@ -74,6 +74,15 @@ else {
                 case 3: 
                     game_end();
                     break;
+                case 4:
+                    if (save_existe()) {
+                        audio_stop_sound(snd_musica_menu);
+                        carregar_jogo();
+                    }
+                    break;
+				case 5:
+                    apagar_save();
+                    break;
             }
         }
         else if (estado_menu == "opcoes") {
