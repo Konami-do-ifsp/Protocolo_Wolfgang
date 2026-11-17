@@ -108,3 +108,8 @@ if (!variable_global_exists("leu_bilhete")) global.leu_bilhete = false;
 bilhete_cd = 0;
 
 aplicar_save();
+
+hp_prev = hp;
+dano_timer = 0;
+dano_de = hp;
+dano_ate = hp;

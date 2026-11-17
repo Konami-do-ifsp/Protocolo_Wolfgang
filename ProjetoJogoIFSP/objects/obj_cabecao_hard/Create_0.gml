@@ -4,7 +4,7 @@ hp = 90;
 max_hp = 90;
 hp_prev = hp;
 hp_trail = hp;
-
+atk_damage = 2
 t_windup        = 14;
 t_air           = 24;
 t_land          = 15;

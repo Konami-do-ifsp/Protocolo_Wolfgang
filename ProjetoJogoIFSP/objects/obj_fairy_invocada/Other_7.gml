@@ -11,10 +11,13 @@ with (obj_player)
 }
 
 
+if (!audio_is_playing(snd_dialogo_fairy1)) {
+    audio_play_sound(snd_dialogo_fairy1, 2, false);
+}
+
 obj_dialogue.start_lines(get_dialogue("fairy_intro"), "fairy");
 bag_remove("bilhete_chao")
 with(obj_glitch_sugador){
 	visible = true
 	mask_index = glitch2
-	
 }

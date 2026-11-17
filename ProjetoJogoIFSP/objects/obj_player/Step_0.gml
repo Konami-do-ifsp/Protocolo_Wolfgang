@@ -316,6 +316,15 @@ bag_off = lerp(bag_off, 0, 0.25);
 if (abs(bag_off) < 0.01) bag_off = 0;
 
 hp_anim = lerp(hp_anim, hp, 0.1);
+
+if (hp < hp_prev) {
+    dano_timer = 20;
+    dano_de = hp_prev;
+    dano_ate = hp;
+}
+hp_prev = hp;
+
+if (dano_timer > 0) dano_timer--;
 var mx = mouse_x;
 var my = mouse_y;
 

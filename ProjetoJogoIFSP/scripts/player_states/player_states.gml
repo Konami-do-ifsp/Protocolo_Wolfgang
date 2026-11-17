@@ -335,6 +335,11 @@ function start_construir()
     kb_y = 0;
     attacking = true;
     state = state_construir;
+    
+    
+    if (!audio_is_playing(snd_dialogo_fairy1)) {
+        audio_play_sound(snd_dialogo_fairy1, 2, true);
+    }
 }
 
 function state_construir()
@@ -458,4 +463,49 @@ function bag_selected(_id)
 
     if (global.bag[_s] == _id) return true;
     return false;
+}
+
+function start_cura(_valor)
+{
+    cura_valor = _valor;
+    cura_feita = false;
+    curando = true;
+
+    hspd = 0;
+    vspd = 0;
+    kb_x = 0;
+    kb_y = 0;
+    if (audio_is_playing(snd_walking)) audio_stop_sound(snd_walking);
+
+    image_xscale = 1;
+    sprite_index = spr_john_sendo_curado;
+    image_index = 0;
+    image_speed = 1;
+
+    var _f = instance_create_depth(x - 80, y - 90, -5000, obj_fada_cura);
+    _f.alvo = id;
+
+    attacking = true;
+    state = state_cura;
+}
+
+function state_cura()
+{
+    invencible = true;
+    inv_timer = 2;
+
+    if (!cura_feita && image_index >= image_number * 0.5)
+    {
+        cura_feita = true;
+        hp = min(hp + cura_valor, max_hp);
+        with (obj_camera) { shake = 2; shake_time = 6; shake_fade = 1; }
+    }
+
+    if (animation_end())
+    {
+        if (!cura_feita) hp = min(hp + cura_valor, max_hp);
+        curando = false;
+        attacking = false;
+        state = state_idle;
+    }
 }

@@ -1,91 +1,61 @@
 hp = 100;
-max_hp = 100;
 flash_timer = 0;
 hit_timer = 0;
+stun = 0;
+wind = 0;
 kb_x = 0;
 kb_y = 0;
-
-
-stun = 0;              
-squash = 0;           
-mv_x = 0;            
+mv_x = 0;
 mv_y = 0;
-moving = false;
-walk_t = random(6.28);
-wind = 0;             
-atk_wind = 10;       
+can_attack = true;
 atk_damage = 2;
-atk_kb = 5;            
-kb_mult = 1;          
-death_blood = 10;
-death_shake = 1;
-shadow_w = 10;        
-bob_y = 0;            
 
 take_damage = function(damage, dir)
 {
     hp -= damage;
-	var _n = instance_create_depth(x, bbox_top, -6000, obj_damage_number);
-	_n.txt = string(damage);
-    hit_timer = 30;
+    hit_timer = 30; flash_timer = 15; stun = 12; wind = 0;
     global.hitstop = 4;
-    flash_timer = 15;
-    stun = 12;
-    squash = 1;
-    wind = 0;   
 
-    if (dir != undefined)
+    var _n = instance_create_depth(x, bbox_top, -6000, obj_damage_number);
+    _n.txt = string(damage);
+
+    if (dir != undefined) { kb_x += lengthdir_x(4, dir); kb_y += lengthdir_y(4, dir); }
+
+    if (hp > 0) return;
+
+    global.hitstop = 7;
+    repeat (10)
     {
-        kb_x += lengthdir_x(4 * kb_mult, dir);
-        kb_y += lengthdir_y(4 * kb_mult, dir);
+        var _b = instance_create_layer(x, y, "Instances", obj_blood);
+        _b.dir = ((dir != undefined) ? dir : random(360)) + random_range(-90, 90);
     }
+    with (obj_camera) { shake = 1; shake_time = 6; shake_fade = 1; }
+	if (instance_exists(obj_player))
+	{
+	    var _chance = 0.25;
+	    if (obj_player.hp <= 4) _chance = 0.6;
 
-    if (hp <= 0)
-    {
-        global.hitstop = 7;
-
-        repeat (death_blood)
-        {
-            var _b = instance_create_layer(x, y, "Instances", obj_blood);
-            _b.dir = ((dir != undefined) ? dir : random(360)) + random_range(-90, 90);
-        }
-
-        with (obj_camera)
-        {
-            shake = other.death_shake;
-            shake_time = 6;
-            shake_fade = 1;
-        }
-
-        instance_destroy();
-    }
+	    if (random(1) < _chance) instance_create_layer(x, y, "Instances", obj_cura);
+	}
+    instance_destroy();
 };
-
 
 hit_player = function(_dir)
 {
-    obj_player.hp -= atk_damage;
-    audio_play_sound(snd_player_hitted, 1, false);
-    can_attack = false;
-    alarm[0] = 30;
-
-    with (obj_camera) { shake = 3; shake_time = 6; shake_fade = 1; }
-
-    global.hitstop = 4;
-
-    var _kx = lengthdir_x(atk_kb, _dir);
-    var _ky = lengthdir_y(atk_kb, _dir);
-
     with (obj_player)
     {
-        kb_x += _kx;
-        kb_y += _ky;
-        flash_timer = 20;
-        invencible = true;
-        inv_timer = 30;
+        hp -= other.atk_damage;
+        kb_x += lengthdir_x(5, _dir);
+        kb_y += lengthdir_y(5, _dir);
+        flash_timer = 20; invencible = true; inv_timer = 30;
     }
 
-  
+    with (obj_camera) { shake = 3; shake_time = 6; shake_fade = 1; }
+    audio_play_sound(snd_player_hitted, 1, false);
+    global.hitstop = 4;
+
+    can_attack = false;
+    alarm[0] = 30;
     kb_x -= lengthdir_x(1.5, _dir);
     kb_y -= lengthdir_y(1.5, _dir);
 };
@@ -94,25 +64,11 @@ update_attack = function(_range)
 {
     if (!instance_exists(obj_player)) { wind = 0; return; }
 
+    var _livre = !obj_player.invencible && obj_player.hp > 0;
     var _d = point_distance(x, y, obj_player.x, obj_player.y);
-    var _dir = point_direction(x, y, obj_player.x, obj_player.y);
 
+    if (wind == 0 && stun <= 0 && can_attack && _d <= _range && _livre) wind = 10;
 
-    if (wind == 0 && stun <= 0 && can_attack && _d <= _range
-        && !obj_player.invencible && obj_player.hp > 0)
-    {
-        wind = atk_wind;
-    }
-
-    if (wind > 0)
-    {
-        wind--;
-
-        if (wind == 0)
-        {
-   
-            if (_d <= _range + 6 && !obj_player.invencible && obj_player.hp > 0)
-                hit_player(_dir);
-        }
-    }
+    if (wind > 0 && --wind == 0 && _d <= _range + 6 && _livre)
+        hit_player(point_direction(x, y, obj_player.x, obj_player.y));
 };
