@@ -84,6 +84,7 @@ body::after {
     color: #00ff66;
     position: relative;
     animation: glitch-subtitulo 4s infinite;
+    font-size: 65px;
 }
 
 @keyframes glitch-subtitulo {
@@ -197,14 +198,14 @@ body::after {
 .introducao {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: row-reverse;         
     gap: 50px;
     padding: 40px 10% 80px;
     border-bottom: 1px solid #333;
-    flex-direction: column;
     align-items: center;
     text-align: center;
 }
+
 .jogabilidade {
     display: flex;
     justify-content: space-between;
@@ -223,8 +224,8 @@ body::after {
 }
 
 .texto-introducao p {
-    color: rgb(196, 178, 178);
-    font-size: 20px;
+    color: rgb(239, 232, 232);
+    font-size: 25px;
     line-height: 1.6;
 }
 
@@ -252,8 +253,8 @@ body::after {
 .processo > p {
     max-width: 800px;
     margin: 0 auto;
-    color: #aaaaaa;
-    font-size: 18px;
+    color: white;
+    font-size: 22px;
     line-height: 1.6;
 }
 
@@ -420,8 +421,9 @@ body::after {
 }
 
 .card p {
-    color: rgb(196, 178, 178);
+    color: white;
     line-height: 1.5;
+    font-size: 20px;
 }
 
 
@@ -528,6 +530,16 @@ body::after {
 .ponto.ativo {
     background: #00ff66;
 }
+nome-personagem {
+    display: block;          
+    position: relative;
+    margin: 1em 0;
+    font-family: 'Orbitron', monospace;
+    font-size: 30px;
+    font-weight: bold;
+    color: #00ff66;
+    animation: glitch-subtitulo 4s infinite;
+}
 
 
 
@@ -543,8 +555,8 @@ body::after {
 
 .documentacao > p,
 .integrantes > p {
-    color: #aaaaaa;
-    font-size: 18px;
+    color: white;
+    font-size: 25px;
     line-height: 1.5;
 }
 
@@ -627,8 +639,8 @@ body::after {
 
 .card-integrante p {
     margin: 0;
-    color: rgb(196, 178, 178);
-    font-size: 15px;
+    color: white;
+    font-size: 20px;
     line-height: 1.4;
 }
 
@@ -813,6 +825,68 @@ body::after {
   max-width: 100%;     
   image-rendering: pixelated;
 }
+.carrossel-videos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1000px;
+    margin: 30px auto 0;
+}
+
+.video-quadro {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 2px solid #00ff66;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.gameplay .video-quadro iframe {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    aspect-ratio: auto;
+}
+
+.indicadores-videos {
+    margin-top: 15px;
+}
+
+.ponto-video {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 5px;
+    border: 0;
+    border-radius: 50%;
+    background: #555;
+    cursor: pointer;
+}
+
+.ponto-video.ativo {
+    background: #00ff66;
+}
+.gifs-jogabilidade {
+    flex: 1;
+    max-width: 300px;                
+    display: grid;
+    grid-template-columns: 1fr;      
+    gap: 20px;
+}
+
+.gifs-jogabilidade img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #000;
+    image-rendering: pixelated;
+}
     </style>
 </head>
 
@@ -847,6 +921,11 @@ body::after {
 
         
         <section class="introducao" id="sobre">
+
+            <div class="imagem-introducao">
+        <img src="ArquivosSite/preview_gamepad.gif" alt="Descreva o gif aqui">
+    </div>
+
 
             <div class="texto-introducao">
                 <h2 class="glitch-subtitulo">Sobre o jogo</h2>
@@ -933,116 +1012,138 @@ body::after {
 
         </section>
 
-        <section class="personagens" id="personagens">
+      <section class="personagens" id="personagens">
 
-            <h2 class="glitch-subtitulo">Personagens</h2>
+    <h2 class="glitch-subtitulo">Personagens</h2>
 
-            <div class="cards-personagens">
+    <div class="cards-personagens">
 
-                <div class="card">
-                    <img src="ArquivosSite/jonh2.png" alt="John Wolfgang">
-                    <h3 class="glitch-subtitulo">John Wolfgang</h3>
-                    <p>
-                        Um jovem carpinteiro que acorda em um mundo corrompido por tecnologia e números binários,
-                        buscando entender o que aconteceu.
-                    </p>
-                </div>
+        <div class="card">
+            <img src="ArquivosSite/jonh2.png" alt="John Wolfgang" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">John Wolfgang</nome-personagem>
+            <p>
+                Um jovem carpinteiro que acorda em um mundo corrompido por tecnologia e números binários,
+                buscando entender o que aconteceu.
+            </p>
+        </div>
 
-                <div class="card">
-                    <img src="ArquivosSite/fairy.png" alt="Fairy">
-                    <h3 class="glitch-subtitulo">Fairy</h3>
-                    <p>
-                        Uma máquina falante construída por John que o acompanha na jornada e o ajuda a descobrir os segredos daquele mundo.
-                    </p>
-                </div>
+        <div class="card">
+            <img src="ArquivosSite/fairy.png" alt="Fairy" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">Fairy</nome-personagem>
+            <p>
+                Uma máquina falante construída por John que o acompanha na jornada e o ajuda a descobrir os segredos daquele mundo.
+            </p>
+        </div>
 
-                <div class="card">
-                    <img src="ArquivosSite/celular.png" alt="Celular">
-                    <h3 class="glitch-subtitulo">Mr. Telephone Man</h3>
-                    <p>
-                        Um enorme aparelho esquelético, bem assustador, esconde algum tipo de segredo.
-                    </p>
-                </div>
+        <div class="card">
+            <img src="ArquivosSite/celular.png" alt="Mr. Telephone Man, um celular esquelético gigante" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">Mr. Telephone Man</nome-personagem>
+            <p>
+                Um enorme aparelho esquelético, bem assustador, esconde algum tipo de segredo.
+            </p>
+        </div>
 
-                <div class="card">
-                    <img src="ArquivosSite/inimigo 2 tv grande.png" alt="Televisão">
-                    <h3 class="glitch-subtitulo">Cabeção</h3>
-                    <p>
-                        Uma imensa máquina assustadora, aparenta ter cérebro humano.
-                    </p>
-                </div>
+        <div class="card">
+            <img src="ArquivosSite/inimigo 2 tv grande.png" alt="Cabeção, uma televisão gigante" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">Cabeção</nome-personagem>
+            <p>
+                Uma imensa máquina assustadora, aparenta ter cérebro humano.
+            </p>
+        </div>
 
-                <div class="card">
-                    <img src="ArquivosSite/inimigo1 tv.png" alt="Inimigo">
-                    <h3 class="glitch-subtitulo">Tenna</h3>
-                    <p>
-                        Uma pequena máquina a primeira vista simpática, porém continua sendo um mistério.
-                    </p>
-                </div>
-                <div class="card">
-                    <img src="ArquivosSite/luk_64.png" alt="Inimigo">
-                    <h3 class="glitch-subtitulo">Luk</h3>
-                    <p>
-                       O velho ancião da vila, infelizmente está desaparecido.
-                    </p>
-                </div>
+        <div class="card">
+            <img src="ArquivosSite/inimigo1 tv.png" alt="Tenna, uma pequena televisão" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">Tenna</nome-personagem>
+            <p>
+                Uma pequena máquina a primeira vista simpática, porém continua sendo um mistério.
+            </p>
+        </div>
 
-            </div>
+        <div class="card">
+            <img src="ArquivosSite/luk_64.png" alt="Luk, o ancião da vila" loading="lazy">
+            <nome-personagem role="heading" aria-level="3">Luk</nome-personagem>
+            <p>
+                O velho ancião da vila, infelizmente está desaparecido.
+            </p>
+        </div>
 
-        </section>
+    </div>
+
+</section>
 
 
         <section class="jogabilidade" id="jogabilidade">
 
             <div class="texto-introducao">
-                <h2 class="glitch-subtitulo">Jogabilidade</h2>
+    <h2 class="glitch-subtitulo">Jogabilidade</h2>
 
-                <p>
-                    Jogabilidade
+    <p>
+        Controle o martelo de John juntamente das suas habilidades de construção!
+        Utilize suas habilidades para acabar com as máquinas que dominam seu mundo.
+    </p>
 
-        Estilo: Top-Down
-        <br>
-        <br>
-        Progressão: Colete componentes de hardware para melhorar o inventário e desbloquear habilidades especiais. (siga a historia completando os objetivos e passando pelas dungeons)
-        <br>
-        <br>
-        Combate: Use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes.(combate usando a marreta de john e melhore suas estatisticas usando itens encontrados pelo mapa)
-        <br>
-        <br>
-        Dungeons Educativas: Fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
-        <br>
-        <br>
-        Desafios: Cada Dungeon possui mecânicas únicas. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite.(cada dungeon possui mecanicas unicas, envolvendo desafios envolvendo as materias do curso tecnico. Em uma dungeon etmos q converter decimal para binario)
-                </p>
-            </div>
+    <p>
+        <strong>Estilo:</strong> Top-Down.
+    </p>
 
-            <div class="gifizinho">
-                <img src="ArquivosSite/sprite_lado.gif" alt="John Wolfgang em animação de ataque">
-            </div>
+    <p>
+        <strong>Progressão:</strong> explore dungeons, colete componentes de hardware para melhorar o inventário e desbloqueie novas armas e habilidades que aumentarão seus status e facilitarão sua jornada. Siga a história completando os objetivos e passando pelas dungeons.
+    </p>
+
+    <p>
+        <strong>Combate:</strong> use armas de curto e longo alcance, além de habilidades obtidas ao derrotar chefes. O combate usa a marreta de John, e você melhora suas estatísticas com itens encontrados pelo mapa. A CPU aumenta a capacidade de resposta do seu martelo, causando mais dano, e o aspirador lendário ajuda a sugar inconsistências no cenário e a puxar inimigos para perto de você.
+    </p>
+
+    <p>
+        <strong>Dungeons educativas:</strong> fases inspiradas nas disciplinas do curso técnico, onde cada chefe representa uma matéria. Derrote-os para resgatar professores que fornecem dicas para avançar.
+    </p>
+
+    <p>
+        <strong>Desafios:</strong> cada dungeon possui mecânicas únicas, ligadas às matérias do curso técnico. Na fase de Lógica de Programação, por exemplo, o jogo muda para plataforma e você precisa corrigir erros de sintaxe em algoritmos dentro de um tempo limite. Em outra dungeon, é preciso converter decimal para binário.
+    </p>
+
+    <p>
+        Compreenda a história do jogo e o mistério ao redor do mundo resolvendo problemas e puzzles na jornada. Ao longo da sua trajetória, você vai aprender muito mais sobre hardware sem nem mesmo perceber!
+    </p>
+</div>
+
+            <div class="gifs-jogabilidade">
+            <img src="ArquivosSite/sprite_lado.gif">
+            <img src="ArquivosSite/preview_cura_fadinha.gif">
+            <img src="ArquivosSite/preview_succao_meio.gif">
+            <img src="ArquivosSite/previa_coleta_5_transparente.gif">
+        </div>
 
         </section>
 
 
         
-        <section class="gameplay" id="gameplay">
+       <section class="gameplay" id="gameplay">
 
-            <h2 class="glitch-subtitulo">Gameplay</h2>
-            <p>Vídeo da gameplay</p>
+    <h2 class="glitch-subtitulo">Gameplay</h2>
 
-           <iframe
-                src="https://www.youtube.com/embed/WCAktvzO-Y8"
+    <div class="carrossel-videos" tabindex="0" aria-label="Carrossel de vídeos da gameplay">
+        <button class="seta" id="video-anterior" aria-label="Vídeo anterior">&#10094;</button>
+
+        <div class="video-quadro">
+            <iframe id="video-player"
                 title="Gameplay de Protocolo Wolfgang"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                referrerpolicy="strict-origin-when-cross-origin"
+                allow="autoplay; encrypted-media; picture-in-picture"
                 allowfullscreen>
             </iframe>
+        </div>
 
-        
-            <p class="aviso-video">
-                O vídeo não carregou? <a href="https://drive.google.com/drive/folders/1HfULXqf8uJKKK1ej9eF81RYDGAOWsAK5" target="_blank">Abra direto no Google Drive</a>.
-            </p>
+        <button class="seta" id="video-proximo" aria-label="Próximo vídeo">&#10095;</button>
+    </div>
 
-        </section>
+    <p id="video-titulo"></p>
+    <div class="indicadores-videos" id="video-pontos"></div>
+
+    <p class="aviso-video">
+        O vídeo não carregou? <a href="https://drive.google.com/drive/folders/1HfULXqf8uJKKK1ej9eF81RYDGAOWsAK5" target="_blank">Abra direto no Google Drive</a>.
+    </p>
+
+</section>
 
 
     
@@ -1054,10 +1155,11 @@ body::after {
                 <button class="seta anterior" onclick="mudar(-1)">&#10094;</button>
 
                 <div class="slides">
-                    <img src="ArquivosSite/codigo1.jpeg" alt="Código 1" class="slide ativo">
-                    <img src="ArquivosSite/codigo2.jpeg" alt="Código 2" class="slide">
-                    <img src="ArquivosSite/codigo3.jpeg" alt="Código 3" class="slide">
-                    <img src="ArquivosSite/codigo4.jpeg" alt="Código 4" class="slide">
+                    <img src="ArquivosSite/codigo certo 1.jpeg" alt="Código 1" class="slide ativo">
+                    <img src="ArquivosSite/codigo certo 2.jpeg" alt="Código 2" class="slide">
+                    <img src="ArquivosSite/codigo certo 3.jpeg" alt="Código 3" class="slide">
+                    <img src="ArquivosSite/codigo certo 4.jpeg" alt="Código 4" class="slide">
+                    <img src="ArquivosSite/codigo certo 5.jpeg" alt="Código 5" class="slide">
                 </div>
 
                 <button class="seta proximo" onclick="mudar(1)">&#10095;</button>
@@ -1069,6 +1171,7 @@ body::after {
                 <span class="ponto" onclick="slideAtual(1)"></span>
                 <span class="ponto" onclick="slideAtual(2)"></span>
                 <span class="ponto" onclick="slideAtual(3)"></span>
+                <span class="ponto" onclick="slideAtual(4)"></span>
             </div>
            
 
@@ -1237,11 +1340,51 @@ body::after {
                 alternarMenu(false);
             });
         });
+        const listaVideos = [
+    { titulo: "Trailer",      src: "https://www.youtube.com/embed/2-tPqmRIX3E" },
+    { titulo: "Gameplay", src: "https://youtube.com/embed/snOIxRelYgc" }
+];
+
+const videoPlayer = document.getElementById("video-player");
+const videoTitulo = document.getElementById("video-titulo");
+const videoPontos = document.getElementById("video-pontos");
+let videoAtual = 0;
+
+listaVideos.forEach(function (video, i) {
+    const ponto = document.createElement("button");
+    ponto.className = "ponto-video";
+    ponto.setAttribute("aria-label", "Ir para o vídeo " + (i + 1));
+    ponto.addEventListener("click", function () { mostrarVideo(i); });
+    videoPontos.appendChild(ponto);
+});
+
+function mostrarVideo(numero) {
+    videoAtual = (numero + listaVideos.length) % listaVideos.length;
+    videoPlayer.src = listaVideos[videoAtual].src;
+    videoTitulo.textContent = listaVideos[videoAtual].titulo;
+
+    videoPontos.querySelectorAll(".ponto-video").forEach(function (ponto, i) {
+        ponto.classList.toggle("ativo", i === videoAtual);
+    });
+}
+
+document.getElementById("video-anterior").addEventListener("click", function () {
+    mostrarVideo(videoAtual - 1);
+});
+document.getElementById("video-proximo").addEventListener("click", function () {
+    mostrarVideo(videoAtual + 1);
+});
+
+mostrarVideo(0);
 
     </script>
 
 </body>
 </html>
+
+
+
+
 
 
 
